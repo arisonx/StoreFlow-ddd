@@ -1,6 +1,8 @@
 import { v4 } from 'uuid'
 import Product from './product.entity'
 import { randomUUID } from 'crypto'
+import { describe, it, expect } from 'vitest'
+
 describe('Product unit tests', () => {
   it('Should throw error when name is empty', () => {
     expect(() => {
