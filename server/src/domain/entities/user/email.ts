@@ -1,19 +1,19 @@
 export default class Email {
-  private _value: string;
+  private _value: string
 
   constructor(value: string) {
-    this._value = value;
-    this.validate();
+    this._value = value
+    this.validate()
   }
 
   get value() {
-    return this._value;
+    return this._value
   }
 
   validate() {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(this._value)) {
-      throw new Error("Invalid email format");
+      throw new Error('Invalid email format')
     }
   }
 }
