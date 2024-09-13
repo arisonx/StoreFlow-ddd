@@ -1,4 +1,4 @@
-import BaseDomainEntity from '../../base/entities/base-domain-entity'
+import BaseDomainEntity from '@domain/base/entities/base-domain-entity'
 
 export interface IProduct {
   id: string
