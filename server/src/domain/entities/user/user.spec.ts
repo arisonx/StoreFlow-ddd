@@ -1,11 +1,11 @@
-import { randomUUID } from 'crypto'
+import { randomUUID } from 'node:crypto'
+import { describe, expect, it } from 'vitest'
 import CPF from './cpf'
 import Email from './email'
 import { Password } from './password'
 import RG from './rg'
 import User from './user.entity'
 import Usermame from './username'
-import { describe, it, expect } from 'vitest'
 
 describe('User unit tests', () => {
   it('Should throw error if usermame is more than 255 caracteres', () => {

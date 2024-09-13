@@ -1,7 +1,7 @@
+import { randomUUID } from 'node:crypto'
 import { v4 } from 'uuid'
+import { describe, expect, it } from 'vitest'
 import Product from './product.entity'
-import { randomUUID } from 'crypto'
-import { describe, it, expect } from 'vitest'
 
 describe('Product unit tests', () => {
   it('Should throw error when name is empty', () => {

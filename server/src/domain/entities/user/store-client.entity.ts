@@ -1,6 +1,6 @@
 import User, { IUserCreationProps } from './user.entity'
 
-interface IStoreClient extends IUserCreationProps {}
+export type IStoreClient = IUserCreationProps
 
 export class StoreClient extends User {
   constructor(props: IStoreClient) {
