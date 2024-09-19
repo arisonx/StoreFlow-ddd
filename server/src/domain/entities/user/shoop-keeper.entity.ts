@@ -1,34 +1,40 @@
 import Store from '../store/store.entity'
+import { Contract } from './contract'
 import Signature from './signature'
 import User, { IUserCreationProps } from './user.entity'
 interface IShoopKeeperCreationProps extends IUserCreationProps {
-  store: Store
-  signature: Signature
+  signature?: Signature
+  contract?: Contract
 }
-
 export default class ShopKeeper extends User {
   private _store: Store
   private _signature: Signature
+  private _contract: Contract
 
   constructor(props: IShoopKeeperCreationProps) {
     super(props)
     this._signature = props.signature
-    this._store = props.store
+    this._contract = props.contract;
     this.validate()
   }
 
   private validate() {
-    if (!this._store) {
-      throw new Error('Store is Required')
+    if (!this._signature && !this._contract) {
+      throw new Error('Signature or Contract is Required')
     }
 
-    if (!this._signature) {
-      throw new Error('Signature is Required')
+    if(this.signature && this.contract){
+      throw new Error('It is not possible to have a contract and a signature')
     }
+
   }
 
   get signature() {
     return this._signature
+  }
+
+  get contract() {
+    return this._contract
   }
 
   get store() {
