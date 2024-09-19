@@ -1,4 +1,3 @@
-import { v4 } from "uuid";
 import Product from "../products/product.entity";
 import Cart from "./cart.entity";
 import { CartProduct } from "../cart_products/cart-products.entity";
@@ -22,17 +21,17 @@ describe("Cart unit tests", () => {
       id: randomUUID(),
       name: "Shampoo",
       price: 200,
-      storeId: v4(),
+      storeId: randomUUID(),
     });
     product2 = new Product({
       id: randomUUID(),
       name: "Sabonete",
       price: 250,
-      storeId: v4(),
+      storeId: randomUUID(),
     });
     cart = new Cart({
       id: randomUUID(),
-      userId: v4(),
+      userId: randomUUID(),
     });
   });
 

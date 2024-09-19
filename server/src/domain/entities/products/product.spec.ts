@@ -1,4 +1,3 @@
-import { v4 } from "uuid";
 import Product from "./product.entity";
 import { randomUUID } from "crypto";
 describe("Product unit tests", () => {
@@ -8,7 +7,7 @@ describe("Product unit tests", () => {
         name: "",
         id: randomUUID(),
         price: 100,
-        storeId: v4(),
+        storeId: randomUUID(),
       });
     }).toThrow("Name is Required");
   });
@@ -19,7 +18,7 @@ describe("Product unit tests", () => {
         name: "",
         price: 100,
         id: randomUUID(),
-        storeId: v4(),
+        storeId: randomUUID(),
       });
     }).toThrow("Name is Required");
   });
@@ -30,7 +29,7 @@ describe("Product unit tests", () => {
         name: "Shampoo",
         price: 0,
         id: randomUUID(),
-        storeId: v4(),
+        storeId: randomUUID(),
       });
     }).toThrow("Price is Required");
   });
@@ -40,7 +39,7 @@ describe("Product unit tests", () => {
       name: "Shampoo",
       id: randomUUID(),
       price: 200,
-      storeId: v4(),
+      storeId: randomUUID(),
     });
     product.changeName("Shampoo 2");
     expect(product.name).toBe("Shampoo 2");
@@ -51,7 +50,7 @@ describe("Product unit tests", () => {
       id: randomUUID(),
       name: "Shampoo",
       price: 200,
-      storeId: v4(),
+      storeId: randomUUID(),
     });
     product.changePrice(200);
     expect(product.price).toBe(200);
