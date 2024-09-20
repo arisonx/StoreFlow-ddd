@@ -1,4 +1,5 @@
-import { randomUUID } from 'crypto'
+import { randomUUID } from 'node:crypto'
+import { describe, expect, it } from 'vitest'
 import BaseDomainEntity from './base-domain-entity'
 
 describe('Base Domain Entity unit tests', () => {

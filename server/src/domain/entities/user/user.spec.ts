@@ -1,12 +1,13 @@
-import { randomUUID } from "crypto";
-import CPF from "./cpf";
-import Email from "./email";
-import { Password } from "./password";
-import RG from "./rg";
-import User from "./user.entity";
-import Usermame from "./username";
-describe("User unit tests", () => {
-  it("Should throw error if usermame is more than 255 caracteres", () => {
+import { randomUUID } from 'node:crypto'
+import CPF from './cpf'
+import Email from './email'
+import { Password } from './password'
+import RG from './rg'
+import User from './user.entity'
+import Usermame from './username'
+
+describe('User unit tests', () => {
+  it('Should throw error if usermame is more than 255 caracteres', () => {
     expect(() => {
       new User({
         id: randomUUID(),

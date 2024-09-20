@@ -5,8 +5,8 @@ export default class BaseDomainEntity {
 
   constructor(id: string) {
     this._id = id
-    if(!this._id){
-      throw new Error("Id is Required");
+    if (!this._id) {
+      throw new Error('Id is Required')
     }
   }
 

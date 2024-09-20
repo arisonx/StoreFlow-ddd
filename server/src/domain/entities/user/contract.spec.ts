@@ -1,4 +1,4 @@
-import { Contract, IContractConstructorProps } from "./contract"
+import { Contract, IContractConstructorProps } from './contract'
 describe('Contract unit tests', () => {
   it('Should throw error if startDate is invalid', () => {
     expect(() => {
@@ -38,7 +38,7 @@ describe('Contract unit tests', () => {
         value: 0,
       })
     }).toThrow('Value of Contract must be greater than zero')
-    
+
     expect(() => {
       new Contract({
         startDate: new Date('2024-09-01'),

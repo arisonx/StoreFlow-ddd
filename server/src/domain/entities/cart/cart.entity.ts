@@ -1,5 +1,4 @@
-// Assuming that BaseDomainEntity is correctly defined and imported.
-import BaseDomainEntity from '../../base/entities/base-domain-entity'
+import BaseDomainEntity from '@domain/base/entities/base-domain-entity'
 import { CartProduct } from '../cart_products/cart-products.entity'
 
 export interface ICart {

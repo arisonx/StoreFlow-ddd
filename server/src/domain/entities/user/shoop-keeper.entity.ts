@@ -14,7 +14,7 @@ export default class ShopKeeper extends User {
   constructor(props: IShoopKeeperCreationProps) {
     super(props)
     this._signature = props.signature
-    this._contract = props.contract;
+    this._contract = props.contract
     this.validate()
   }
 
@@ -23,10 +23,9 @@ export default class ShopKeeper extends User {
       throw new Error('Signature or Contract is Required')
     }
 
-    if(this.signature && this.contract){
+    if (this.signature && this.contract) {
       throw new Error('It is not possible to have a contract and a signature')
     }
-
   }
 
   get signature() {
