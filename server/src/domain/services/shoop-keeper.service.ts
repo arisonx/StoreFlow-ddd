@@ -1,6 +1,6 @@
-import ShopKeeper from '@domain/entities/user/shoop-keeper.entity'
-import { SignaturePlanEnum } from '@domain/entities/user/signature'
-import { monthInserter } from '@utils/month-inserter'
+import { monthInserter } from '../../utils/month-inserter'
+import ShopKeeper from '../entities/user/shoop-keeper.entity'
+import { SignaturePlanEnum } from '../entities/user/signature'
 
 export class ShoopKeeperService {
   signaturePeriod(shoopKeeper: ShopKeeper) {
