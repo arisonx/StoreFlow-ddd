@@ -26,8 +26,6 @@ export default defineConfig({
       '@application/': new URL('./src/application/', import.meta.url).pathname,
       // ts-expect-error expect
       '@test/': new URL('./test/', import.meta.url).pathname,
-      // ts-expect-error expect
-      '@utils/': new URL('./src/utils/', import.meta.url).pathname,
     },
   },
   plugins: [

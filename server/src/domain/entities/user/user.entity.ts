@@ -1,9 +1,9 @@
-import BaseDomainEntity from '@domain/base/entities/base-domain-entity'
 import CPF from './cpf'
 import Email from './email'
-import { Password } from './password'
-import RG from './rg'
 import Name from './username'
+import RG from './rg'
+import BaseDomainEntity from '../../base/entities/base-domain-entity'
+import { Password } from './password'
 
 export interface IUserCreationProps {
   id: string

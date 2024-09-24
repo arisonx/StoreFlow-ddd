@@ -23,8 +23,7 @@
       "@infra/*": ["./src/infra/*"],
       "@domain/*": ["./src/domain/*"],
       "@application/*": ["./src/application/*"],
-      "@test/*": ["./test/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@test/*": ["./test/*"]
     }
   },
   "exclude": ["./node_modules/*", "dist"]
