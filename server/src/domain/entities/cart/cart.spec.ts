@@ -1,14 +1,9 @@
-import { v4 } from 'uuid'
-import Product from '../products/product.entity'
 import Cart from './cart.entity'
 import { CartProduct } from '../cart_products/cart-products.entity'
 import { randomUUID } from 'crypto'
-import { describe, it, expect, beforeAll } from 'vitest'
-
 describe('Cart unit tests', () => {
-  let product1: Product
   let cartProduct: CartProduct
-  let product2: Product
+
   let cart: Cart
 
   beforeAll(() => {
@@ -20,21 +15,9 @@ describe('Cart unit tests', () => {
       total: 200,
     })
 
-    product1 = new Product({
-      id: randomUUID(),
-      name: 'Shampoo',
-      price: 200,
-      storeId: v4(),
-    })
-    product2 = new Product({
-      id: randomUUID(),
-      name: 'Sabonete',
-      price: 250,
-      storeId: v4(),
-    })
     cart = new Cart({
       id: randomUUID(),
-      userId: v4(),
+      userId: randomUUID(),
     })
   })
 

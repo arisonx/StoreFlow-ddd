@@ -1,5 +1,4 @@
 import { randomUUID } from 'crypto'
-import Store from '../entities/store/store.entity'
 import CPF from '../entities/user/cpf'
 import Email from '../entities/user/email'
 import { Password } from '../entities/user/password'
@@ -8,7 +7,6 @@ import ShopKeeper from '../entities/user/shoop-keeper.entity'
 import Signature, { SignaturePlanEnum } from '../entities/user/signature'
 import Usermame from '../entities/user/username'
 import { ShoopKeeperService } from './shoop-keeper.service'
-import { describe, it, expect } from 'vitest'
 
 describe('ShopKeeperService unit unit tests', () => {
   const shoopKeeperService = new ShoopKeeperService()
@@ -19,7 +17,6 @@ describe('ShopKeeperService unit unit tests', () => {
       id: randomUUID(),
       name: new Usermame('Luis 1'),
       signature: new Signature(SignaturePlanEnum.STARTER, signatureStartDate),
-      store: new Store('1'),
       cpf: new CPF('63067078080'),
       password: new Password('S3curityP@ssw0rd'),
       email: new Email('teste@email.com'),
@@ -38,7 +35,6 @@ describe('ShopKeeperService unit unit tests', () => {
       id: randomUUID(),
       name: new Usermame('Luis 2'),
       signature: new Signature(SignaturePlanEnum.BASIC, signatureStartDate),
-      store: new Store('1'),
       cpf: new CPF('63067078080'),
       password: new Password('S3curityP@ssw0rd'),
       email: new Email('teste@email.com'),
@@ -57,7 +53,6 @@ describe('ShopKeeperService unit unit tests', () => {
       id: randomUUID(),
       name: new Usermame('Luis 3'),
       signature: new Signature(SignaturePlanEnum.PREMIUM, signatureStartDate),
-      store: new Store('1'),
       cpf: new CPF('63067078080'),
       password: new Password('S3curityP@ssw0rd'),
       email: new Email('teste@email.com'),

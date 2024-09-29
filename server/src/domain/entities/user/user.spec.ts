@@ -1,11 +1,10 @@
-import { randomUUID } from 'crypto'
+import { randomUUID } from 'node:crypto'
 import CPF from './cpf'
 import Email from './email'
 import { Password } from './password'
 import RG from './rg'
 import User from './user.entity'
 import Usermame from './username'
-import { describe, it, expect } from 'vitest'
 
 describe('User unit tests', () => {
   it('Should throw error if usermame is more than 255 caracteres', () => {
@@ -68,7 +67,7 @@ describe('User unit tests', () => {
       email: new Email('teste@email.com'),
       rg: new RG('435144820'),
     })
-    expect(user.cpf.value).toBe('63067078080')
+    expect(user.cpf).toBe('63067078080')
   })
 
   it('Should throw error if password dont contain at least one special character', () => {
@@ -119,7 +118,7 @@ describe('User unit tests', () => {
       email: new Email('teste@email.com'),
       rg: new RG('435144820'),
     })
-    expect(user.password.value).toBe('S3curityP@ssw0rd')
+    expect(user.password).toBe('S3curityP@ssw0rd')
   })
 
   it('Should throw error if email is invalid.', () => {
@@ -144,7 +143,7 @@ describe('User unit tests', () => {
       email: new Email('teste@email.com'),
       rg: new RG('435144820'),
     })
-    expect(user.email.value).toBe('teste@email.com')
+    expect(user.email).toBe('teste@email.com')
   })
 
   it('Should throw error if rg is invalid.', () => {
@@ -169,6 +168,6 @@ describe('User unit tests', () => {
       email: new Email('teste@email.com'),
       rg: new RG('435144820'),
     })
-    expect(user.rg.value).toBe('435144820')
+    expect(user.rg).toBe('435144820')
   })
 })

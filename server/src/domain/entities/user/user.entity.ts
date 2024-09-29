@@ -31,19 +31,19 @@ export default class User extends BaseDomainEntity {
   }
 
   get email() {
-    return this._email
+    return this._email.value
   }
 
   get password() {
-    return this._password
+    return this._password.value
   }
 
   get cpf() {
-    return this._cpf
+    return this._cpf.value
   }
 
   get rg() {
-    return this._rg
+    return this._rg.value
   }
 
   get name() {
