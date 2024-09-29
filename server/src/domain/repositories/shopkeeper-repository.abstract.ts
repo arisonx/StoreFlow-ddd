@@ -10,6 +10,8 @@ export default abstract class IShopKeeperRepository
 {
   abstract count(): Promise<number>
 
+  abstract emailAlreadyExists(email: string): Promise<boolean>
+
   abstract create(entity: ShopKeeper): Promise<void>
 
   abstract delete(id: string): Promise<void>

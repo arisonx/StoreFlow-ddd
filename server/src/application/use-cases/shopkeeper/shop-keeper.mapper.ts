@@ -4,7 +4,7 @@ export class ShopKeeperMapper {
   public static toOutput(shopKeeper: ShopKeeper) {
     return {
       id: shopKeeper.id,
-      name: shopKeeper.cpf,
+      name: shopKeeper.name,
       cpf: shopKeeper.cpf,
       password: shopKeeper.password,
       email: shopKeeper.email,
