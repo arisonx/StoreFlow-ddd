@@ -44,6 +44,7 @@ const shopKeeperVitestRepo = {
   create: vi.fn(),
   count: vi.fn(),
   emailAlreadyExists: vi.fn(),
+  cpfAlreadyExists: vi.fn(),
   delete: vi.fn(),
   update: vi.fn(),
 }
