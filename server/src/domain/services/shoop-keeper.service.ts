@@ -3,7 +3,7 @@ import ShopKeeper from '../entities/user/shoop-keeper.entity'
 import { SignaturePlanEnum } from '../entities/user/signature'
 
 export class ShoopKeeperService {
-  signaturePeriod(shoopKeeper: ShopKeeper) {
+  public static signaturePeriod(shoopKeeper: ShopKeeper) {
     const { plan, startDate } = shoopKeeper.signature
 
     const signaturePeriodLiterals = {
