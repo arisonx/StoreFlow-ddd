@@ -1,5 +1,5 @@
 export interface IResourceListOutputProps<T> {
-  items: T
+  items: T[]
   meta: {
     totalPages: number
     registersInPage: number
