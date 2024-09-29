@@ -1,9 +1,11 @@
 import IRepository, {
+  IResourceListInputProps,
   IResourceListOutputProps,
 } from 'domain/base/repositories/base-repo.interface'
 import ShopKeeper from 'domain/entities/user/shoop-keeper.entity'
-
-export interface IShopKeeperListInputProps {}
+export interface IShopKeeperListInputProps extends IResourceListInputProps {
+  name?: string
+}
 
 export default abstract class IShopKeeperRepository
   implements IRepository<ShopKeeper, IShopKeeperListInputProps>
