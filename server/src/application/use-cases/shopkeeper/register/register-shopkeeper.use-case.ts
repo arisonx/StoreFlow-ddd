@@ -30,7 +30,7 @@ export default class RegisterShopKeeperWithContractUseCase extends CommonUseCase
 
     if (cpf) {
       this.notification.add({
-        context: 'ShoopKeeper Register',
+        context: 'ShopKeeper Register',
         error: new ConflictError('CPF already exists'),
       })
     }
