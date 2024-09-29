@@ -16,8 +16,7 @@ interface CommonShopKeeperFactoryInputProps {
   rg: string
 }
 
-interface IWithCredentialsInputProps
-  extends CommonShopKeeperFactoryInputProps {}
+type IWithCredentialsInputProps = CommonShopKeeperFactoryInputProps
 
 interface IWithCredentialsAndSignatureInputProps
   extends CommonShopKeeperFactoryInputProps {
