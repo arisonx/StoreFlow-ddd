@@ -1,5 +1,6 @@
 import ShopKeeperFactory from './factories/shoop-keeper.facotry'
 import { SignaturePlanEnum } from './signature'
+import { describe, it, expect } from 'vitest'
 describe('ShopKeeper Unit Tests', () => {
   it('Should throw an error if ShopKeeper does not have Signature or Contract', () => {
     expect(() => {

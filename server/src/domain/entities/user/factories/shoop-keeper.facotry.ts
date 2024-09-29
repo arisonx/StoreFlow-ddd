@@ -8,7 +8,7 @@ import RG from '../rg'
 import { Contract } from '../contract'
 import Signature, { SignaturePlanEnum } from '../signature'
 
-interface CommonShopKeeperFactoryInputProps {
+export interface CommonShopKeeperFactoryInputProps {
   name: string
   cpf: string
   password: string
@@ -16,17 +16,15 @@ interface CommonShopKeeperFactoryInputProps {
   rg: string
 }
 
-type IWithCredentialsInputProps = CommonShopKeeperFactoryInputProps
-
-interface IWithCredentialsAndSignatureInputProps
+export type IWithCredentialsInputProps = CommonShopKeeperFactoryInputProps
+export interface IWithCredentialsAndSignatureInputProps
   extends CommonShopKeeperFactoryInputProps {
   signature: {
     plan: SignaturePlanEnum
     startDate: Date
   }
 }
-
-interface IWithCredentialsAndContractInputProps
+export interface IWithCredentialsAndContractInputProps
   extends CommonShopKeeperFactoryInputProps {
   contract: {
     startDate: Date
@@ -35,7 +33,7 @@ interface IWithCredentialsAndContractInputProps
   }
 }
 
-interface IWithCredentialsAndContractSignatureInputProps
+export interface IWithCredentialsAndContractSignatureInputProps
   extends IWithCredentialsAndContractInputProps,
     IWithCredentialsAndSignatureInputProps {}
 

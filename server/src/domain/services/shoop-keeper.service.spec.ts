@@ -7,9 +7,9 @@ import ShopKeeper from '../entities/user/shoop-keeper.entity'
 import Signature, { SignaturePlanEnum } from '../entities/user/signature'
 import Usermame from '../entities/user/username'
 import { ShoopKeeperService } from './shoop-keeper.service'
+import { describe, it, expect } from 'vitest'
 
 describe('ShopKeeperService unit unit tests', () => {
-  const shoopKeeperService = new ShoopKeeperService()
   it('Should add a starter signature period', () => {
     const signatureStartDate = new Date('2024-02-01')
     const signatureEndDate = new Date('2024-03-01')
@@ -23,7 +23,7 @@ describe('ShopKeeperService unit unit tests', () => {
       rg: new RG('435144820'),
     })
 
-    shoopKeeperService.signaturePeriod(shoopKeeper)
+    ShoopKeeperService.signaturePeriod(shoopKeeper)
 
     expect(signatureEndDate).toStrictEqual(shoopKeeper.signature.endDate)
   })
@@ -41,7 +41,7 @@ describe('ShopKeeperService unit unit tests', () => {
       rg: new RG('435144820'),
     })
 
-    shoopKeeperService.signaturePeriod(shoopKeeper)
+    ShoopKeeperService.signaturePeriod(shoopKeeper)
 
     expect(signatureEndDate).toStrictEqual(shoopKeeper.signature.endDate)
   })
@@ -59,7 +59,7 @@ describe('ShopKeeperService unit unit tests', () => {
       rg: new RG('435144820'),
     })
 
-    shoopKeeperService.signaturePeriod(shoopKeeper)
+    ShoopKeeperService.signaturePeriod(shoopKeeper)
 
     expect(signatureEndDate).toStrictEqual(shoopKeeper.signature.endDate)
   })
