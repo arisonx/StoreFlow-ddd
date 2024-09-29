@@ -14,6 +14,8 @@ export default abstract class IShopKeeperRepository
 
   abstract emailAlreadyExists(email: string): Promise<boolean>
 
+  abstract cpfAlreadyExists(cpf: string): Promise<boolean>
+
   abstract create(entity: ShopKeeper): Promise<void>
 
   abstract delete(id: string): Promise<void>
