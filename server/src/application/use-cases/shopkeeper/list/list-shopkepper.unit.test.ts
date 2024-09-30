@@ -1,6 +1,7 @@
 import ShopKeeperFactory from 'domain/entities/user/factories/shoop-keeper.facotry'
 import { ListShopKeeperUseCase } from './list-shopkeeper.use-case'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { SignaturePlanEnum } from 'domain/entities/user/signature'
 
 const shopKeeper1 = {
   name: 'Luis Fernando',
@@ -28,16 +29,31 @@ const shopKeeper2 = {
   },
 }
 
+const shopKeeper3 = {
+  name: 'Merian Cardoso',
+  cpf: '63067078080',
+  email: 'merian.cardoso@example.com',
+  password: 'AnotherP@ssw0rd',
+  rg: '123456789',
+  signature: {
+    startDate: new Date('2024-09-15'),
+    plan: SignaturePlanEnum.PREMIUM,
+  },
+}
+
 const user1 = ShopKeeperFactory.withContract(shopKeeper1)
+
 const user2 = ShopKeeperFactory.withContract(shopKeeper2)
+
+const user3 = ShopKeeperFactory.withSignature(shopKeeper3)
 
 const shopKeeperVitestRepo = {
   findOne: vi.fn(),
   findAll: vi.fn().mockResolvedValue({
-    items: [user1, user2],
+    items: [user1, user2, user3],
     meta: {
       totalPages: 1,
-      registersInPage: 2,
+      registersInPage: 3,
       currentPage: 1,
     },
   }),
@@ -60,21 +76,21 @@ describe('ListShopKeeperUseCase Unit Tests', () => {
   it('Should list all ShopKeepers', async () => {
     const results = await listShopKeeperUseCase.execute()
 
-    expect(results.items).toHaveLength(2)
-    results.items.forEach((item) => {
-      expect(item).toEqual({
-        id: expect.any(String),
-        name: item.name,
-        cpf: item.cpf,
-        password: item.password,
-        email: item.email,
-        rg: item.rg,
-        contract: {
-          startDate: item.contract.startDate,
-          endDate: item.contract.endDate,
-          value: item.contract.value,
-        },
-      })
+    expect(results.items).toHaveLength(3)
+    expect(results.meta.totalPages).toBe(1)
+    expect(results.meta.registersInPage).toBe(3)
+    expect(results.meta.totalPages).toBe(1)
+
+    const shopKeepers = [shopKeeper1, shopKeeper2, shopKeeper3]
+
+    results.items.forEach((item, index) => {
+      const currentShopKeeper = shopKeepers[index]
+      const signatureOrContract = item.signature || item.contract
+      expect(currentShopKeeper.name).toBe(item.name)
+      expect(currentShopKeeper.email).toBe(item.email)
+      expect(currentShopKeeper.cpf).toBe(item.cpf)
+      expect(currentShopKeeper.rg).toBe(item.rg)
+      expect(signatureOrContract).toBeTruthy()
     })
     expect(shopKeeperVitestRepo.findAll).toHaveBeenCalledTimes(1)
   })
