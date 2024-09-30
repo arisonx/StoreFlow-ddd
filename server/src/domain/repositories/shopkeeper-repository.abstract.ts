@@ -12,6 +12,8 @@ export default abstract class IShopKeeperRepository
 {
   abstract count(): Promise<number>
 
+  abstract findByEmail(email: string): Promise<ShopKeeper | undefined>
+
   abstract emailAlreadyExists(email: string): Promise<boolean>
 
   abstract cpfAlreadyExists(cpf: string): Promise<boolean>

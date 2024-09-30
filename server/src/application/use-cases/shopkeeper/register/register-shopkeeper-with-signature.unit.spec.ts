@@ -10,6 +10,7 @@ const shopKeeperVitestRepo = {
   count: vi.fn(),
   emailAlreadyExists: vi.fn(),
   cpfAlreadyExists: vi.fn(),
+  findByEmail: vi.fn(),
   delete: vi.fn(),
   update: vi.fn(),
 }
