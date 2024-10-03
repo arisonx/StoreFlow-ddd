@@ -14,7 +14,7 @@ export interface IResourceListInputProps {
 }
 
 export default interface IRepository<T, O extends IResourceListInputProps> {
-  findOne(id: string): Promise<T>
+  findOne(id: string): Promise<T | undefined>
   create(entity: T): Promise<void>
   findAll(options: O): Promise<IResourceListOutputProps<T>>
   delete(id: string): Promise<void>

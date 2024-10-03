@@ -52,6 +52,14 @@ export class Contract {
     return this._startDate
   }
 
+  get expired() {
+    if (!this._endDate) {
+      return false
+    }
+    const currentDate = new Date()
+    return currentDate > this._endDate
+  }
+
   get endDate() {
     return this._endDate
   }
