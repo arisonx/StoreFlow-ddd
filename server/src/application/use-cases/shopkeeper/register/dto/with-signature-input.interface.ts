@@ -1,4 +1,5 @@
-import { IWithCredentialsAndSignatureInputProps } from 'domain/entities/user/factories/shoop-keeper.facotry'
+import { IWithCredentialsAndSignatureInputProps } from '@domain/entities/user/factories/shoop-keeper.factory'
 
-export default interface IRegisterShopKeeperWithSignatureInputProps
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+export default interface IRegisterShopKeeperInitialWithSignatureInputProps
   extends IWithCredentialsAndSignatureInputProps {}

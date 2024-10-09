@@ -1,13 +1,13 @@
-import EncryptContract from 'application/contracts/encrypt.interface'
-import IShopKeeperRepository from 'domain/repositories/shopkeeper-repository.abstract'
-import { IAuthShopKeeperInputDto } from './dto/input.dto'
-import UnauthorizedError from 'domain/base/errors/unauthorized-error'
-import CommonUseCase from 'application/@shared/base.use-case'
-import { ShopKeeperMapper } from '../shop-keeper.mapper'
-import { IAuthShopKeeperOutputDto } from './dto/output.dto'
-export class AuthShopKeeperUseCase extends CommonUseCase {
+import CommonUseCase from '@application/@shared/base.use-case'
+import EncryptContract from '@application/contracts/encrypt.interface'
+import UnauthorizedError from '@domain/base/errors/unauthorized-error'
+import IShopKeeperInitialRepository from '@domain/repositories/shopkeeper-repository.abstract'
+import { ShopKeeperInitialMapper } from '../shop-keeper.mapper'
+import { IAuthShopKeeperInitialInputDto } from './dto/input.dto'
+import { IAuthShopKeeperInitialOutputDto } from './dto/output.dto'
+export class AuthShopKeeperInitialUseCase extends CommonUseCase {
   constructor(
-    private readonly shopKeeperRepo: IShopKeeperRepository,
+    private readonly ShopKeeperInitialRepo: IShopKeeperInitialRepository,
     private readonly encryptContract: EncryptContract,
   ) {
     super()
@@ -15,32 +15,33 @@ export class AuthShopKeeperUseCase extends CommonUseCase {
   async execute({
     email,
     password,
-  }: IAuthShopKeeperInputDto): Promise<IAuthShopKeeperOutputDto> {
-    const shopKeeper = await this.shopKeeperRepo.findByEmail(email)
+  }: IAuthShopKeeperInitialInputDto): Promise<IAuthShopKeeperInitialOutputDto> {
+    const ShopKeeperInitial =
+      await this.ShopKeeperInitialRepo.findByEmail(email)
 
-    if (!shopKeeper) {
+    if (!ShopKeeperInitial) {
       throw new UnauthorizedError('Invalid Email or Password')
     }
 
     const isValidPassword = await this.encryptContract.compare(
       password,
-      shopKeeper.password,
+      ShopKeeperInitial.password,
     )
 
     if (!isValidPassword) {
       throw new UnauthorizedError('Invalid Email or Password')
     }
 
-    if (shopKeeper.contract?.expired) {
+    if (ShopKeeperInitial.contract?.expired) {
       throw new UnauthorizedError('Contract Expired')
     }
 
-    if (shopKeeper.signature?.expired) {
+    if (ShopKeeperInitial.signature?.expired) {
       throw new UnauthorizedError('Signature Expired')
     }
 
     this.notification.issue()
 
-    return ShopKeeperMapper.toOutput(shopKeeper)
+    return ShopKeeperInitialMapper.toOutput(ShopKeeperInitial)
   }
 }

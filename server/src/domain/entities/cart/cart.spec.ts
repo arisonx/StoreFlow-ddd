@@ -1,7 +1,7 @@
-import Cart from './cart.entity'
+import { randomUUID } from 'node:crypto'
 import { CartProduct } from '../cart_products/cart-products.entity'
-import { randomUUID } from 'crypto'
-import { describe, it, expect, beforeAll } from 'vitest'
+import Cart from './cart.entity'
+
 describe('Cart unit tests', () => {
   let cartProduct: CartProduct
 

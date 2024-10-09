@@ -1,31 +1,32 @@
-import CommonUseCase from 'application/@shared/base.use-case'
-import IShopKeeperRepository from 'domain/repositories/shopkeeper-repository.abstract'
-import { ShoopKeeperService } from 'domain/services/shoop-keeper.service'
-import { RegisterShopKeeperUseCase } from './register-shopkeeper.use-case'
-import EncryptContract from 'application/contracts/encrypt.interface'
-import ShopKeeperFactory from 'domain/entities/user/factories/shoop-keeper.facotry'
-import IRegisterShopKeeperWithSignatureInputProps from './dto/with-signature-input.interface'
-import { ShopKeeperMapper } from '../shop-keeper.mapper'
-export class RegisterShopKeeperWithSignatureUseCase {
+import EncryptContract from '@application/contracts/encrypt.interface'
+import ShopKeeperInitialFactory from '@domain/entities/user/factories/shoop-keeper.factory'
+
+import IShopKeeperInitialRepository from '@domain/repositories/shopkeeper-repository.abstract'
+import { ShoopKeeperService } from '@domain/services/shoop-keeper.service'
+import { ShopKeeperInitialMapper } from '../shop-keeper.mapper'
+import IRegisterShopKeeperInitialWithSignatureInputProps from './dto/with-signature-input.interface'
+import { RegisterShopKeeperInitialUseCase } from './register-shopkeeper.use-case'
+
+export class RegisterShopKeeperInitialWithSignatureUseCase {
   constructor(
-    private readonly shopKeeperRepo: IShopKeeperRepository,
-    private readonly registerShopKeeperCase: RegisterShopKeeperUseCase,
+    private readonly ShopKeeperInitialRepo: IShopKeeperInitialRepository,
+    private readonly registerShopKeeperInitialCase: RegisterShopKeeperInitialUseCase,
     private readonly encryptContract: EncryptContract,
   ) {}
 
-  async execute(dto: IRegisterShopKeeperWithSignatureInputProps) {
-    await this.registerShopKeeperCase.execute({
+  async execute(dto: IRegisterShopKeeperInitialWithSignatureInputProps) {
+    await this.registerShopKeeperInitialCase.execute({
       cpf: dto.cpf,
       email: dto.email,
     })
 
     dto.password = await this.encryptContract.hash(dto.password)
 
-    const shopKeeper = ShopKeeperFactory.withSignature(dto)
+    const ShopKeeperInitial = ShopKeeperInitialFactory.withSignature(dto)
 
-    ShoopKeeperService.signaturePeriod(shopKeeper)
+    ShoopKeeperService.signaturePeriod(ShopKeeperInitial)
 
-    await this.shopKeeperRepo.create(shopKeeper)
-    return ShopKeeperMapper.toOutputWithSignature(shopKeeper)
+    await this.ShopKeeperInitialRepo.create(ShopKeeperInitial)
+    return ShopKeeperInitialMapper.toOutputWithSignature(ShopKeeperInitial)
   }
 }

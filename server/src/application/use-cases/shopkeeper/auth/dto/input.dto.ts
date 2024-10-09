@@ -1,4 +1,4 @@
-export interface IAuthShopKeeperInputDto {
+export interface IAuthShopKeeperInitialInputDto {
   email: string
   password: string
 }

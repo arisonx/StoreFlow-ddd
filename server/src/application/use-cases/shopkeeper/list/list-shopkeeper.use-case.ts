@@ -1,15 +1,27 @@
-import IShopKeeperRepository from 'domain/repositories/shopkeeper-repository.abstract'
-import { IListShopKeeperInputDto } from './dto/input'
-import { ShopKeeperMapper } from '../shop-keeper.mapper'
+import IShopKeeperInitialRepository, {
+  IShopKeeperInitialListInputProps,
+} from '@domain/repositories/shopkeeper-repository.abstract'
+import { ShopKeeperInitialMapper } from '../shop-keeper.mapper'
+import { IListShopKeeperInitialInputDto } from './dto/input'
 
-export class ListShopKeeperUseCase {
-  constructor(private readonly shopKeeperRepo: IShopKeeperRepository) {}
+export class ListShopKeeperInitialUseCase {
+  constructor(
+    private readonly ShopKeeperInitialRepo: IShopKeeperInitialRepository,
+  ) {}
 
-  async execute(dto?: IListShopKeeperInputDto) {
-    const result = await this.shopKeeperRepo.findAll(dto);
+  async execute(dto?: IListShopKeeperInitialInputDto) {
+    const input: IShopKeeperInitialListInputProps = {
+      all: dto?.all,
+      limit: dto?.limit,
+      name: dto?.name,
+      offset: dto?.offset,
+    }
+
+    const result = await this.ShopKeeperInitialRepo.findAll(input)
+
     return {
       ...result,
-      items: result.items.map(ShopKeeperMapper.toOutput),
+      items: result.items.map(ShopKeeperInitialMapper.toOutput),
     }
   }
 }

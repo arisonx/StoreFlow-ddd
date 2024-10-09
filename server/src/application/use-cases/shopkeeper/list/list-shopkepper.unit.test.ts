@@ -1,9 +1,8 @@
-import ShopKeeperFactory from 'domain/entities/user/factories/shoop-keeper.facotry'
-import { ListShopKeeperUseCase } from './list-shopkeeper.use-case'
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { SignaturePlanEnum } from 'domain/entities/user/signature'
+import ShopKeeperInitialFactory from '@domain/entities/user/factories/shoop-keeper.factory'
+import { SignaturePlanEnum } from '@domain/entities/user/signature'
+import { ListShopKeeperInitialUseCase } from './list-shopkeeper.use-case'
 
-const shopKeeper1 = {
+const ShopKeeperInitial1 = {
   name: 'Luis Fernando',
   cpf: '63067078080',
   email: 'luisfernandogvv@gmail.com',
@@ -16,7 +15,7 @@ const shopKeeper1 = {
   },
 }
 
-const shopKeeper2 = {
+const ShopKeeperInitial2 = {
   name: 'Maria Silva',
   cpf: '63067078080',
   email: 'maria.silva@example.com',
@@ -29,7 +28,7 @@ const shopKeeper2 = {
   },
 }
 
-const shopKeeper3 = {
+const ShopKeeperInitial3 = {
   name: 'Merian Cardoso',
   cpf: '63067078080',
   email: 'merian.cardoso@example.com',
@@ -41,13 +40,13 @@ const shopKeeper3 = {
   },
 }
 
-const user1 = ShopKeeperFactory.withContract(shopKeeper1)
+const user1 = ShopKeeperInitialFactory.withContract(ShopKeeperInitial1)
 
-const user2 = ShopKeeperFactory.withContract(shopKeeper2)
+const user2 = ShopKeeperInitialFactory.withContract(ShopKeeperInitial2)
 
-const user3 = ShopKeeperFactory.withSignature(shopKeeper3)
+const user3 = ShopKeeperInitialFactory.withSignature(ShopKeeperInitial3)
 
-const shopKeeperVitestRepo = {
+const ShopKeeperInitialVitestRepo = {
   findOne: vi.fn(),
   findAll: vi.fn().mockResolvedValue({
     items: [user1, user2, user3],
@@ -66,38 +65,44 @@ const shopKeeperVitestRepo = {
   update: vi.fn(),
 }
 
-describe('ListShopKeeperUseCase Unit Tests', () => {
-  let listShopKeeperUseCase: ListShopKeeperUseCase
+describe('ListShopKeeperInitialUseCase Unit Tests', () => {
+  let listShopKeeperInitialUseCase: ListShopKeeperInitialUseCase
 
   beforeEach(() => {
-    listShopKeeperUseCase = new ListShopKeeperUseCase(shopKeeperVitestRepo)
+    listShopKeeperInitialUseCase = new ListShopKeeperInitialUseCase(
+      ShopKeeperInitialVitestRepo,
+    )
     vi.clearAllMocks()
   })
 
-  it('Should list all ShopKeepers', async () => {
-    const results = await listShopKeeperUseCase.execute()
+  it('Should list all ShopKeeperInitials', async () => {
+    const results = await listShopKeeperInitialUseCase.execute()
 
     expect(results.items).toHaveLength(3)
     expect(results.meta.totalPages).toBe(1)
     expect(results.meta.registersInPage).toBe(3)
     expect(results.meta.totalPages).toBe(1)
 
-    const shopKeepers = [shopKeeper1, shopKeeper2, shopKeeper3]
+    const ShopKeeperInitials = [
+      ShopKeeperInitial1,
+      ShopKeeperInitial2,
+      ShopKeeperInitial3,
+    ]
 
     results.items.forEach((item, index) => {
-      const currentShopKeeper = shopKeepers[index]
+      const currentShopKeeperInitial = ShopKeeperInitials[index]
       const signatureOrContract = item.signature || item.contract
-      expect(currentShopKeeper.name).toBe(item.name)
-      expect(currentShopKeeper.email).toBe(item.email)
-      expect(currentShopKeeper.cpf).toBe(item.cpf)
-      expect(currentShopKeeper.rg).toBe(item.rg)
+      expect(currentShopKeeperInitial.name).toBe(item.name)
+      expect(currentShopKeeperInitial.email).toBe(item.email)
+      expect(currentShopKeeperInitial.cpf).toBe(item.cpf)
+      expect(currentShopKeeperInitial.rg).toBe(item.rg)
       expect(signatureOrContract).toBeTruthy()
     })
-    expect(shopKeeperVitestRepo.findAll).toHaveBeenCalledTimes(1)
+    expect(ShopKeeperInitialVitestRepo.findAll).toHaveBeenCalledTimes(1)
   })
 
-  it('Should return empty list when no ShopKeepers are found', async () => {
-    shopKeeperVitestRepo.findAll.mockResolvedValueOnce({
+  it('Should return empty list when no ShopKeeperInitials are found', async () => {
+    ShopKeeperInitialVitestRepo.findAll.mockResolvedValueOnce({
       items: [],
       meta: {
         totalPages: 0,
@@ -106,20 +111,20 @@ describe('ListShopKeeperUseCase Unit Tests', () => {
       },
     })
 
-    const results = await listShopKeeperUseCase.execute()
+    const results = await listShopKeeperInitialUseCase.execute()
 
     expect(results.items).toHaveLength(0)
-    expect(shopKeeperVitestRepo.findAll).toHaveBeenCalledTimes(1)
+    expect(ShopKeeperInitialVitestRepo.findAll).toHaveBeenCalledTimes(1)
   })
 
   it('Should handle errors gracefully', async () => {
-    shopKeeperVitestRepo.findAll.mockRejectedValueOnce(
+    ShopKeeperInitialVitestRepo.findAll.mockRejectedValueOnce(
       new Error('Database error'),
     )
 
-    await expect(listShopKeeperUseCase.execute()).rejects.toThrow(
+    await expect(listShopKeeperInitialUseCase.execute()).rejects.toThrow(
       'Database error',
     )
-    expect(shopKeeperVitestRepo.findAll).toHaveBeenCalledTimes(1)
+    expect(ShopKeeperInitialVitestRepo.findAll).toHaveBeenCalledTimes(1)
   })
 })

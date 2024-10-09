@@ -1,4 +1,4 @@
-import { NotificationError } from 'domain/base/errors/notification-error'
+import { NotificationError } from '@domain/base/errors/notification-error'
 
 interface INotificationProps<T> {
   context: string
@@ -13,7 +13,7 @@ export class Notification<T extends Error> {
 
   issue() {
     if (this.errors.length > 0) {
-      let message = this.errors
+      const message = this.errors
         .map((item) => `${item.context}: ${item.error.message}`)
         .join(', ')
       throw new NotificationError(message)

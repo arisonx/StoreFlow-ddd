@@ -1,4 +1,5 @@
-import { IWithCredentialsAndContractInputProps } from 'domain/entities/user/factories/shoop-keeper.facotry'
+import { IWithCredentialsAndContractInputProps } from '@domain/entities/user/factories/shoop-keeper.factory'
 
-export default interface IRegisterShopKeeperWithContractInputProps
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+export default interface IRegisterShopKeeperInitialWithContractInputProps
   extends IWithCredentialsAndContractInputProps {}

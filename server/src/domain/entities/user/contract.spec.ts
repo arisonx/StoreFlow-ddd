@@ -1,5 +1,5 @@
 import { Contract, IContractConstructorProps } from './contract'
-import { describe, it, expect } from 'vitest'
+
 describe('Contract unit tests', () => {
   it('Should throw error if startDate is invalid', () => {
     expect(() => {

@@ -1,12 +1,12 @@
-import { randomUUID } from 'crypto'
-import ShopKeeper from '../shoop-keeper.entity'
-import Username from '../username'
-import CPF from '../cpf'
-import { Password } from '../password'
-import Email from '../email'
-import RG from '../rg'
+import { randomUUID } from 'node:crypto'
 import { Contract } from '../contract'
+import CPF from '../cpf'
+import Email from '../email'
+import { Password } from '../password'
+import RG from '../rg'
+import ShopKeeper from '../shoop-keeper.entity'
 import Signature, { SignaturePlanEnum } from '../signature'
+import Username from '../username'
 
 export interface CommonShopKeeperFactoryInputProps {
   name: string
@@ -89,7 +89,6 @@ export default class ShopKeeperFactory {
       name: new Username(name),
       cpf: new CPF(cpf),
       password: new Password(password),
-      contract: null,
       email: new Email(email),
       rg: new RG(rg),
       signature: new Signature(signature.plan, signature.startDate),
@@ -107,7 +106,6 @@ export default class ShopKeeperFactory {
     return new ShopKeeper({
       id: randomUUID(),
       name: new Username(name),
-      signature: null,
       cpf: new CPF(cpf),
       password: new Password(password),
       email: new Email(email),

@@ -1,4 +1,5 @@
-import { ShopKeeperMapper } from '../../shop-keeper.mapper'
+import { ShopKeeperInitialMapper } from '../../shop-keeper.mapper'
 
-export interface IAuthShopKeeperOutputDto
-  extends ReturnType<typeof ShopKeeperMapper.toOutput> {}
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+export interface IAuthShopKeeperInitialOutputDto
+  extends ReturnType<typeof ShopKeeperInitialMapper.toOutput> {}

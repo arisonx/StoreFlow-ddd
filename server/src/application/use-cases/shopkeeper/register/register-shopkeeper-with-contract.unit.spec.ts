@@ -1,8 +1,7 @@
-import RegisterShopKeeperWithContractUseCase from './register-shopkeeper-with-contract.use-case'
-import { RegisterShopKeeperUseCase } from './register-shopkeeper.use-case'
-import { describe, beforeEach, it, expect } from 'vitest'
+import RegisterShopKeeperInitialWithContractUseCase from './register-shopkeeper-with-contract.use-case'
+import { RegisterShopKeeperInitialUseCase } from './register-shopkeeper.use-case'
 
-const shopKeeperVitestRepo = {
+const ShopKeeperInitialVitestRepo = {
   findOne: vi.fn(),
   findAll: vi.fn(),
   create: vi.fn(),
@@ -19,26 +18,26 @@ const mockBcryptAdapter = {
   compare: vi.fn(),
 }
 
-describe('RegisterShopKeeperWithContractUseCase Unit Tests', () => {
-  let registerShopKeeperWithContractUseCase: RegisterShopKeeperWithContractUseCase
-  let registerShopKeeperUseCase: RegisterShopKeeperUseCase
+describe('RegisterShopKeeperInitialWithContractUseCase Unit Tests', () => {
+  let registerShopKeeperInitialWithContractUseCase: RegisterShopKeeperInitialWithContractUseCase
+  let registerShopKeeperInitialUseCase: RegisterShopKeeperInitialUseCase
 
   beforeEach(() => {
-    registerShopKeeperUseCase = new RegisterShopKeeperUseCase(
-      shopKeeperVitestRepo,
+    registerShopKeeperInitialUseCase = new RegisterShopKeeperInitialUseCase(
+      ShopKeeperInitialVitestRepo,
     )
-    registerShopKeeperWithContractUseCase =
-      new RegisterShopKeeperWithContractUseCase(
-        shopKeeperVitestRepo,
-        registerShopKeeperUseCase,
+    registerShopKeeperInitialWithContractUseCase =
+      new RegisterShopKeeperInitialWithContractUseCase(
+        ShopKeeperInitialVitestRepo,
+        registerShopKeeperInitialUseCase,
         mockBcryptAdapter,
       )
 
     vi.clearAllMocks()
   })
-  it('Should register a ShopKeeper with Contract', async () => {
-    shopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(false)
-    shopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(false)
+  it('Should register a ShopKeeperInitial with Contract', async () => {
+    ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(false)
+    ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(false)
     const hashedPassword =
       '$2a$12$cw3kBusXPtNmL8vrVty4deGFPfCHN.16O8VY4hHMl4QcHeDRcBAP2'
     mockBcryptAdapter.hash.mockResolvedValue(hashedPassword)
@@ -57,7 +56,7 @@ describe('RegisterShopKeeperWithContractUseCase Unit Tests', () => {
     }
 
     const outputDto =
-      await registerShopKeeperWithContractUseCase.execute(inputDto)
+      await registerShopKeeperInitialWithContractUseCase.execute(inputDto)
 
     expect(outputDto).toEqual({
       id: expect.any(String),
