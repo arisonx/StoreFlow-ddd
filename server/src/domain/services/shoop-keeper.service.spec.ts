@@ -8,7 +8,7 @@ import Signature, { SignaturePlanEnum } from '../entities/user/signature'
 import Usermame from '../entities/user/username'
 import { ShoopKeeperService } from './shoop-keeper.service'
 
-describe('ShopKeeperInitialService unit unit tests', () => {
+describe('ShopKeeperService unit unit tests', () => {
   it('Should add a starter signature period', () => {
     const signatureStartDate = new Date('2024-02-01')
     const signatureEndDate = new Date('2024-03-01')

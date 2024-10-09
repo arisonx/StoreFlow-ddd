@@ -1,7 +1,7 @@
 import { SignaturePlanEnum } from '@domain/entities/user/signature'
-import { AuthShopKeeperInitialUseCase } from './auth-shopkeeper.use-case'
+import { AuthShopKeeperUseCase } from './auth-shopkeeper.use-case'
 
-const ShopKeeperInitialVitestRepo = {
+const ShopKeeperVitestRepo = {
   findOne: vi.fn(),
   findAll: vi.fn(),
   create: vi.fn(),
@@ -18,12 +18,12 @@ const mockBcryptAdapter = {
   compare: vi.fn(),
 }
 
-describe('AuthShopKeeperInitialUseCase Unit Tests', () => {
-  let authShopKeeperInitialUseCase: AuthShopKeeperInitialUseCase
+describe('AuthShopKeeperUseCase Unit Tests', () => {
+  let authShopKeeperUseCase: AuthShopKeeperUseCase
 
   beforeAll(() => {
-    authShopKeeperInitialUseCase = new AuthShopKeeperInitialUseCase(
-      ShopKeeperInitialVitestRepo,
+    authShopKeeperUseCase = new AuthShopKeeperUseCase(
+      ShopKeeperVitestRepo,
       mockBcryptAdapter,
     )
     vi.clearAllMocks()
@@ -34,9 +34,9 @@ describe('AuthShopKeeperInitialUseCase Unit Tests', () => {
   })
 
   it('Should throw an error if ShopKeeper not exists', async () => {
-    ShopKeeperInitialVitestRepo.findByEmail.mockResolvedValue(false)
+    ShopKeeperVitestRepo.findByEmail.mockResolvedValue(false)
     expect(async () => {
-      await authShopKeeperInitialUseCase.execute({
+      await authShopKeeperUseCase.execute({
         email: 'merian.cardoso@example.com',
         password: 'AnotherP@ssw0rd',
       })
@@ -44,7 +44,7 @@ describe('AuthShopKeeperInitialUseCase Unit Tests', () => {
   })
 
   it('Should throw an error if CPF is not valid', async () => {
-    ShopKeeperInitialVitestRepo.findByEmail.mockResolvedValue({
+    ShopKeeperVitestRepo.findByEmail.mockResolvedValue({
       name: 'Merian Cardoso',
       cpf: '63067078080',
       email: 'merian.cardoso@example.com',
@@ -58,7 +58,7 @@ describe('AuthShopKeeperInitialUseCase Unit Tests', () => {
     })
     mockBcryptAdapter.compare.mockReturnValue(false)
     expect(async () => {
-      await authShopKeeperInitialUseCase.execute({
+      await authShopKeeperUseCase.execute({
         email: 'merian.cardoso@example.com',
         password: 'AnotherP@ssw0rd',
       })
@@ -66,7 +66,7 @@ describe('AuthShopKeeperInitialUseCase Unit Tests', () => {
   })
 
   it('Should throw an error if ShopKeeper Contract is expired', async () => {
-    ShopKeeperInitialVitestRepo.findByEmail.mockResolvedValue({
+    ShopKeeperVitestRepo.findByEmail.mockResolvedValue({
       id: '35c7c1b6-ada3-424d-b1b9-8c646b83ec23',
       name: 'Merian Cardoso',
       cpf: '63067078080',
@@ -82,7 +82,7 @@ describe('AuthShopKeeperInitialUseCase Unit Tests', () => {
     })
     mockBcryptAdapter.compare.mockResolvedValue(true)
     expect(async () => {
-      await authShopKeeperInitialUseCase.execute({
+      await authShopKeeperUseCase.execute({
         email: 'merian.cardoso@example.com',
         password: 'AnotherP@ssw0rd',
       })
@@ -90,7 +90,7 @@ describe('AuthShopKeeperInitialUseCase Unit Tests', () => {
   })
 
   it('Should throw an error if ShopKeeper Signature is expired', async () => {
-    ShopKeeperInitialVitestRepo.findByEmail.mockResolvedValue({
+    ShopKeeperVitestRepo.findByEmail.mockResolvedValue({
       id: '35c7c1b6-ada3-424d-b1b9-8c646b83ec23',
       name: 'Merian Cardoso',
       cpf: '63067078080',
@@ -106,7 +106,7 @@ describe('AuthShopKeeperInitialUseCase Unit Tests', () => {
     })
     mockBcryptAdapter.compare.mockResolvedValue(true)
     expect(async () => {
-      await authShopKeeperInitialUseCase.execute({
+      await authShopKeeperUseCase.execute({
         email: 'merian.cardoso@example.com',
         password: 'AnotherP@ssw0rd',
       })
@@ -114,7 +114,7 @@ describe('AuthShopKeeperInitialUseCase Unit Tests', () => {
   })
 
   it('Should authenticate a ShopKeeper', async () => {
-    ShopKeeperInitialVitestRepo.findByEmail.mockResolvedValue({
+    ShopKeeperVitestRepo.findByEmail.mockResolvedValue({
       id: '35c7c1b6-ada3-424d-b1b9-8c646b83ec23',
       name: 'Merian Cardoso',
       cpf: '63067078080',
@@ -129,11 +129,11 @@ describe('AuthShopKeeperInitialUseCase Unit Tests', () => {
       },
     })
     mockBcryptAdapter.compare.mockResolvedValue(true)
-    const output = await authShopKeeperInitialUseCase.execute({
+    const output = await authShopKeeperUseCase.execute({
       email: 'merian.cardoso@example.com',
       password: 'AnotherP@ssw0rd',
     })
-    expect(ShopKeeperInitialVitestRepo.findByEmail).toBeCalledWith(
+    expect(ShopKeeperVitestRepo.findByEmail).toBeCalledWith(
       'merian.cardoso@example.com',
     )
     expect(output).toBeTruthy()

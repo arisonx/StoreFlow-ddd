@@ -1,32 +1,32 @@
 import EncryptContract from '@application/contracts/encrypt.interface'
-import ShopKeeperInitialFactory from '@domain/entities/user/factories/shoop-keeper.factory'
+import ShopKeeperFactory from '@domain/entities/user/factories/shoop-keeper.factory'
 
-import IShopKeeperInitialRepository from '@domain/repositories/shopkeeper-repository.abstract'
+import IShopKeeperRepository from '@domain/repositories/shopkeeper-repository.abstract'
 import { ShoopKeeperService } from '@domain/services/shoop-keeper.service'
-import { ShopKeeperInitialMapper } from '../shop-keeper.mapper'
-import IRegisterShopKeeperInitialWithSignatureInputProps from './dto/with-signature-input.interface'
-import { RegisterShopKeeperInitialUseCase } from './register-shopkeeper.use-case'
+import { ShopKeeperMapper } from '../shop-keeper.mapper'
+import IRegisterShopKeeperWithSignatureInputProps from './dto/with-signature-input.interface'
+import { RegisterShopKeeperUseCase } from './register-shopkeeper.use-case'
 
-export class RegisterShopKeeperInitialWithSignatureUseCase {
+export class RegisterShopKeeperWithSignatureUseCase {
   constructor(
-    private readonly ShopKeeperInitialRepo: IShopKeeperInitialRepository,
-    private readonly registerShopKeeperInitialCase: RegisterShopKeeperInitialUseCase,
+    private readonly ShopKeeperRepo: IShopKeeperRepository,
+    private readonly registerShopKeeperCase: RegisterShopKeeperUseCase,
     private readonly encryptContract: EncryptContract,
   ) {}
 
-  async execute(dto: IRegisterShopKeeperInitialWithSignatureInputProps) {
-    await this.registerShopKeeperInitialCase.execute({
+  async execute(dto: IRegisterShopKeeperWithSignatureInputProps) {
+    await this.registerShopKeeperCase.execute({
       cpf: dto.cpf,
       email: dto.email,
     })
 
     dto.password = await this.encryptContract.hash(dto.password)
 
-    const ShopKeeper = ShopKeeperInitialFactory.withSignature(dto)
+    const ShopKeeper = ShopKeeperFactory.withSignature(dto)
 
     ShoopKeeperService.signaturePeriod(ShopKeeper)
 
-    await this.ShopKeeperInitialRepo.create(ShopKeeper)
-    return ShopKeeperInitialMapper.toOutputWithSignature(ShopKeeper)
+    await this.ShopKeeperRepo.create(ShopKeeper)
+    return ShopKeeperMapper.toOutputWithSignature(ShopKeeper)
   }
 }

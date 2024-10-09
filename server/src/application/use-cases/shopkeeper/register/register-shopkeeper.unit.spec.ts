@@ -1,6 +1,6 @@
-import { RegisterShopKeeperInitialUseCase } from './register-shopkeeper.use-case'
+import { RegisterShopKeeperUseCase } from './register-shopkeeper.use-case'
 
-const ShopKeeperInitialVitestRepo = {
+const ShopKeeperVitestRepo = {
   findOne: vi.fn(),
   findAll: vi.fn(),
   create: vi.fn(),
@@ -12,57 +12,55 @@ const ShopKeeperInitialVitestRepo = {
   update: vi.fn(),
 }
 
-describe('RegisterShopKeeperInitialUseCase Unit Tests', () => {
-  let registerShopKeeperInitialUseCase: RegisterShopKeeperInitialUseCase
+describe('RegisterShopKeeperUseCase Unit Tests', () => {
+  let registerShopKeeperUseCase: RegisterShopKeeperUseCase
 
   beforeEach(() => {
-    registerShopKeeperInitialUseCase = new RegisterShopKeeperInitialUseCase(
-      ShopKeeperInitialVitestRepo,
+    registerShopKeeperUseCase = new RegisterShopKeeperUseCase(
+      ShopKeeperVitestRepo,
     )
 
     vi.clearAllMocks()
   })
 
   it('Should not register a ShopKeeper if e-mail already exists', async () => {
-    ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(false)
-    ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(true)
+    ShopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(false)
+    ShopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(true)
 
     const inputDto = {
       cpf: '63067078080',
       email: 'luisfernandogvv@gmail.com',
     }
 
-    await expect(
-      registerShopKeeperInitialUseCase.execute(inputDto),
-    ).rejects.toThrow('ShopKeeper Register: E-mail already exists')
+    await expect(registerShopKeeperUseCase.execute(inputDto)).rejects.toThrow(
+      'ShopKeeper Register: E-mail already exists',
+    )
   })
 
   it('Should not register a ShopKeeper if CPF already exists', async () => {
-    ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(false)
-    ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(true)
+    ShopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(false)
+    ShopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(true)
 
     const inputDto = {
       cpf: '63067078080',
       email: 'luisfernandogvv@gmail.com',
     }
 
-    await expect(
-      registerShopKeeperInitialUseCase.execute(inputDto),
-    ).rejects.toThrow('ShopKeeper Register: CPF already exists')
+    await expect(registerShopKeeperUseCase.execute(inputDto)).rejects.toThrow(
+      'ShopKeeper Register: CPF already exists',
+    )
   })
 
   it('Should not register a ShopKeeper if e-mail and cpf already exists', async () => {
-    ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(true)
-    ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(true)
+    ShopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(true)
+    ShopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(true)
 
     const inputDto = {
       cpf: '63067078080',
       email: 'luisfernandogvv@gmail.com',
     }
 
-    await expect(
-      registerShopKeeperInitialUseCase.execute(inputDto),
-    ).rejects.toThrow(
+    await expect(registerShopKeeperUseCase.execute(inputDto)).rejects.toThrow(
       'ShopKeeper Register: E-mail already exists, ShopKeeper Register: CPF already exists',
     )
   })

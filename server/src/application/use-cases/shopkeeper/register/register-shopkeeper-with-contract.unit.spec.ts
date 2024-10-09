@@ -1,7 +1,7 @@
-import RegisterShopKeeperInitialWithContractUseCase from './register-shopkeeper-with-contract.use-case'
-import { RegisterShopKeeperInitialUseCase } from './register-shopkeeper.use-case'
+import RegisterShopKeeperWithContractUseCase from './register-shopkeeper-with-contract.use-case'
+import { RegisterShopKeeperUseCase } from './register-shopkeeper.use-case'
 
-const ShopKeeperInitialVitestRepo = {
+const ShopKeeperVitestRepo = {
   findOne: vi.fn(),
   findAll: vi.fn(),
   create: vi.fn(),
@@ -18,26 +18,26 @@ const mockBcryptAdapter = {
   compare: vi.fn(),
 }
 
-describe('RegisterShopKeeperInitialWithContractUseCase Unit Tests', () => {
-  let registerShopKeeperInitialWithContractUseCase: RegisterShopKeeperInitialWithContractUseCase
-  let registerShopKeeperInitialUseCase: RegisterShopKeeperInitialUseCase
+describe('RegisterShopKeeperWithContractUseCase Unit Tests', () => {
+  let registerShopKeeperWithContractUseCase: RegisterShopKeeperWithContractUseCase
+  let registerShopKeeperUseCase: RegisterShopKeeperUseCase
 
   beforeEach(() => {
-    registerShopKeeperInitialUseCase = new RegisterShopKeeperInitialUseCase(
-      ShopKeeperInitialVitestRepo,
+    registerShopKeeperUseCase = new RegisterShopKeeperUseCase(
+      ShopKeeperVitestRepo,
     )
-    registerShopKeeperInitialWithContractUseCase =
-      new RegisterShopKeeperInitialWithContractUseCase(
-        ShopKeeperInitialVitestRepo,
-        registerShopKeeperInitialUseCase,
+    registerShopKeeperWithContractUseCase =
+      new RegisterShopKeeperWithContractUseCase(
+        ShopKeeperVitestRepo,
+        registerShopKeeperUseCase,
         mockBcryptAdapter,
       )
 
     vi.clearAllMocks()
   })
   it('Should register a ShopKeeper with Contract', async () => {
-    ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(false)
-    ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(false)
+    ShopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(false)
+    ShopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(false)
     const hashedPassword =
       '$2a$12$cw3kBusXPtNmL8vrVty4deGFPfCHN.16O8VY4hHMl4QcHeDRcBAP2'
     mockBcryptAdapter.hash.mockResolvedValue(hashedPassword)
@@ -56,7 +56,7 @@ describe('RegisterShopKeeperInitialWithContractUseCase Unit Tests', () => {
     }
 
     const outputDto =
-      await registerShopKeeperInitialWithContractUseCase.execute(inputDto)
+      await registerShopKeeperWithContractUseCase.execute(inputDto)
 
     expect(outputDto).toEqual({
       id: expect.any(String),

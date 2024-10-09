@@ -1,10 +1,10 @@
-import ShopKeeperInitialFactory from './factories/shoop-keeper.factory'
+import ShopKeeperFactory from './factories/shoop-keeper.factory'
 import { SignaturePlanEnum } from './signature'
 
 describe('ShopKeeper Unit Tests', () => {
   it('Should throw an error if ShopKeeper does not have Signature or Contract', () => {
     expect(() => {
-      ShopKeeperInitialFactory.withBasicCredentials({
+      ShopKeeperFactory.withBasicCredentials({
         name: 'Luis Fernando',
         cpf: '63067078080',
         email: 'luisfernandogvv@gmail.com',
@@ -27,7 +27,7 @@ describe('ShopKeeper Unit Tests', () => {
       },
     }
 
-    const ShopKeeper = ShopKeeperInitialFactory.withSignature(data)
+    const ShopKeeper = ShopKeeperFactory.withSignature(data)
 
     expect(ShopKeeper).toBeTruthy()
     expect(ShopKeeper.name).toEqual(data.name)
@@ -57,7 +57,7 @@ describe('ShopKeeper Unit Tests', () => {
       },
     }
 
-    const ShopKeeper = ShopKeeperInitialFactory.withContract(data)
+    const ShopKeeper = ShopKeeperFactory.withContract(data)
 
     expect(ShopKeeper).toBeTruthy()
     expect(ShopKeeper.name).toEqual(data.name)
@@ -93,7 +93,7 @@ describe('ShopKeeper Unit Tests', () => {
     }
 
     expect(() => {
-      ShopKeeperInitialFactory.withContractAndSignature(data)
+      ShopKeeperFactory.withContractAndSignature(data)
     }).toThrow('It is not possible to have a contract and a signature')
   })
 })

@@ -1,6 +1,6 @@
 import ShopKeeper from '@domain/entities/user/shoop-keeper.entity'
 
-export class ShopKeeperInitialMapper {
+export class ShopKeeperMapper {
   public static toOutput(ShopKeeper: ShopKeeper) {
     const hasSignature = ShopKeeper.signature && {
       signature: {

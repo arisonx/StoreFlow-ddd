@@ -1,8 +1,8 @@
 import { SignaturePlanEnum } from '@domain/entities/user/signature'
-import { RegisterShopKeeperInitialWithSignatureUseCase } from './register-shopkeeper-with-signature.use-case'
-import { RegisterShopKeeperInitialUseCase } from './register-shopkeeper.use-case'
+import { RegisterShopKeeperWithSignatureUseCase } from './register-shopkeeper-with-signature.use-case'
+import { RegisterShopKeeperUseCase } from './register-shopkeeper.use-case'
 
-const ShopKeeperInitialVitestRepo = {
+const ShopKeeperVitestRepo = {
   findOne: vi.fn(),
   findAll: vi.fn(),
   create: vi.fn(),
@@ -19,18 +19,18 @@ const mockBcryptAdapter = {
   compare: vi.fn(),
 }
 
-describe('RegisterShopKeeperInitialWithSignatureUseCase Unit Tests', () => {
-  let registerShopKeeperInitialWithSignatureUseCase: RegisterShopKeeperInitialWithSignatureUseCase
-  let registerShopKeeperInitialUseCase: RegisterShopKeeperInitialUseCase
+describe('RegisterShopKeeperWithSignatureUseCase Unit Tests', () => {
+  let registerShopKeeperWithSignatureUseCase: RegisterShopKeeperWithSignatureUseCase
+  let registerShopKeeperUseCase: RegisterShopKeeperUseCase
 
   beforeEach(() => {
-    registerShopKeeperInitialUseCase = new RegisterShopKeeperInitialUseCase(
-      ShopKeeperInitialVitestRepo,
+    registerShopKeeperUseCase = new RegisterShopKeeperUseCase(
+      ShopKeeperVitestRepo,
     )
-    registerShopKeeperInitialWithSignatureUseCase =
-      new RegisterShopKeeperInitialWithSignatureUseCase(
-        ShopKeeperInitialVitestRepo,
-        registerShopKeeperInitialUseCase,
+    registerShopKeeperWithSignatureUseCase =
+      new RegisterShopKeeperWithSignatureUseCase(
+        ShopKeeperVitestRepo,
+        registerShopKeeperUseCase,
         mockBcryptAdapter,
       )
 
@@ -38,8 +38,8 @@ describe('RegisterShopKeeperInitialWithSignatureUseCase Unit Tests', () => {
   })
 
   it('Should register a ShopKeeper with Starter Signature', async () => {
-    ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(false)
-    ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(false)
+    ShopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(false)
+    ShopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(false)
     const hashedPassword =
       '$2a$12$cw3kBusXPtNmL8vrVty4deGFPfCHN.16O8VY4hHMl4QcHeDRcBAP2'
     mockBcryptAdapter.hash.mockResolvedValue(hashedPassword)
@@ -57,7 +57,7 @@ describe('RegisterShopKeeperInitialWithSignatureUseCase Unit Tests', () => {
     }
 
     const outputDto =
-      await registerShopKeeperInitialWithSignatureUseCase.execute(inputDto)
+      await registerShopKeeperWithSignatureUseCase.execute(inputDto)
 
     expect(outputDto).toEqual({
       id: expect.any(String),
@@ -77,8 +77,8 @@ describe('RegisterShopKeeperInitialWithSignatureUseCase Unit Tests', () => {
   })
 
   it('Should register a ShopKeeper with Basic Signature', async () => {
-    ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(false)
-    ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(false)
+    ShopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(false)
+    ShopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(false)
     const hashedPassword =
       '$2a$12$cw3kBusXPtNmL8vrVty4deGFPfCHN.16O8VY4hHMl4QcHeDRcBAP2'
     mockBcryptAdapter.hash.mockResolvedValue(hashedPassword)
@@ -96,7 +96,7 @@ describe('RegisterShopKeeperInitialWithSignatureUseCase Unit Tests', () => {
     }
 
     const outputDto =
-      await registerShopKeeperInitialWithSignatureUseCase.execute(inputDto)
+      await registerShopKeeperWithSignatureUseCase.execute(inputDto)
 
     expect(outputDto).toEqual({
       id: expect.any(String),
@@ -116,8 +116,8 @@ describe('RegisterShopKeeperInitialWithSignatureUseCase Unit Tests', () => {
   })
 
   it('Should register a ShopKeeper with Premium Signature', async () => {
-    ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(false)
-    ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(false)
+    ShopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(false)
+    ShopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(false)
     const hashedPassword =
       '$2a$12$cw3kBusXPtNmL8vrVty4deGFPfCHN.16O8VY4hHMl4QcHeDRcBAP2'
     mockBcryptAdapter.hash.mockResolvedValue(hashedPassword)
@@ -135,7 +135,7 @@ describe('RegisterShopKeeperInitialWithSignatureUseCase Unit Tests', () => {
     }
 
     const outputDto =
-      await registerShopKeeperInitialWithSignatureUseCase.execute(inputDto)
+      await registerShopKeeperWithSignatureUseCase.execute(inputDto)
 
     expect(outputDto).toEqual({
       id: expect.any(String),

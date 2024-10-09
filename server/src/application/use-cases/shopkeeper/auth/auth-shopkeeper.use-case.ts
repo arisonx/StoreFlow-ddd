@@ -1,13 +1,13 @@
 import CommonUseCase from '@application/@shared/base.use-case'
 import EncryptContract from '@application/contracts/encrypt.interface'
 import UnauthorizedError from '@domain/base/errors/unauthorized-error'
-import IShopKeeperInitialRepository from '@domain/repositories/shopkeeper-repository.abstract'
-import { ShopKeeperInitialMapper } from '../shop-keeper.mapper'
-import { IAuthShopKeeperInitialInputDto } from './dto/input.dto'
-import { IAuthShopKeeperInitialOutputDto } from './dto/output.dto'
-export class AuthShopKeeperInitialUseCase extends CommonUseCase {
+import IShopKeeperRepository from '@domain/repositories/shopkeeper-repository.abstract'
+import { ShopKeeperMapper } from '../shop-keeper.mapper'
+import { IAuthShopKeeperInputDto } from './dto/input.dto'
+import { IAuthShopKeeperOutputDto } from './dto/output.dto'
+export class AuthShopKeeperUseCase extends CommonUseCase {
   constructor(
-    private readonly ShopKeeperInitialRepo: IShopKeeperInitialRepository,
+    private readonly ShopKeeperRepo: IShopKeeperRepository,
     private readonly encryptContract: EncryptContract,
   ) {
     super()
@@ -15,8 +15,8 @@ export class AuthShopKeeperInitialUseCase extends CommonUseCase {
   async execute({
     email,
     password,
-  }: IAuthShopKeeperInitialInputDto): Promise<IAuthShopKeeperInitialOutputDto> {
-    const ShopKeeper = await this.ShopKeeperInitialRepo.findByEmail(email)
+  }: IAuthShopKeeperInputDto): Promise<IAuthShopKeeperOutputDto> {
+    const ShopKeeper = await this.ShopKeeperRepo.findByEmail(email)
 
     if (!ShopKeeper) {
       throw new UnauthorizedError('Invalid Email or Password')
@@ -41,6 +41,6 @@ export class AuthShopKeeperInitialUseCase extends CommonUseCase {
 
     this.notification.issue()
 
-    return ShopKeeperInitialMapper.toOutput(ShopKeeper)
+    return ShopKeeperMapper.toOutput(ShopKeeper)
   }
 }

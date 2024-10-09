@@ -1,28 +1,28 @@
 import EncryptContract from '@application/contracts/encrypt.interface'
-import ShopKeeperInitialFactory from '@domain/entities/user/factories/shoop-keeper.factory'
-import IShopKeeperInitialRepository from '@domain/repositories/shopkeeper-repository.abstract'
-import { ShopKeeperInitialMapper } from '../shop-keeper.mapper'
-import IRegisterShopKeeperInitialWithContractInputProps from './dto/input.interface'
-import { RegisterShopKeeperInitialUseCase } from './register-shopkeeper.use-case'
+import ShopKeeperFactory from '@domain/entities/user/factories/shoop-keeper.factory'
+import IShopKeeperRepository from '@domain/repositories/shopkeeper-repository.abstract'
+import { ShopKeeperMapper } from '../shop-keeper.mapper'
+import IRegisterShopKeeperWithContractInputProps from './dto/input.interface'
+import { RegisterShopKeeperUseCase } from './register-shopkeeper.use-case'
 
-export default class RegisterShopKeeperInitialWithContractUseCase {
+export default class RegisterShopKeeperWithContractUseCase {
   constructor(
-    private readonly ShopKeeperInitialRepo: IShopKeeperInitialRepository,
-    private readonly registerShopKeeperInitialCase: RegisterShopKeeperInitialUseCase,
+    private readonly ShopKeeperRepo: IShopKeeperRepository,
+    private readonly registerShopKeeperCase: RegisterShopKeeperUseCase,
     private readonly encryptContract: EncryptContract,
   ) {}
 
-  async execute(dto: IRegisterShopKeeperInitialWithContractInputProps) {
-    await this.registerShopKeeperInitialCase.execute({
+  async execute(dto: IRegisterShopKeeperWithContractInputProps) {
+    await this.registerShopKeeperCase.execute({
       cpf: dto.cpf,
       email: dto.email,
     })
 
     dto.password = await this.encryptContract.hash(dto.password)
 
-    const ShopKeeper = ShopKeeperInitialFactory.withContract(dto)
+    const ShopKeeper = ShopKeeperFactory.withContract(dto)
 
-    await this.ShopKeeperInitialRepo.create(ShopKeeper)
-    return ShopKeeperInitialMapper.toOutputWithContract(ShopKeeper)
+    await this.ShopKeeperRepo.create(ShopKeeper)
+    return ShopKeeperMapper.toOutputWithContract(ShopKeeper)
   }
 }
