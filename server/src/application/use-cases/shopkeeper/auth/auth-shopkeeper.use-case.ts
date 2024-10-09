@@ -16,32 +16,31 @@ export class AuthShopKeeperInitialUseCase extends CommonUseCase {
     email,
     password,
   }: IAuthShopKeeperInitialInputDto): Promise<IAuthShopKeeperInitialOutputDto> {
-    const ShopKeeperInitial =
-      await this.ShopKeeperInitialRepo.findByEmail(email)
+    const ShopKeeper = await this.ShopKeeperInitialRepo.findByEmail(email)
 
-    if (!ShopKeeperInitial) {
+    if (!ShopKeeper) {
       throw new UnauthorizedError('Invalid Email or Password')
     }
 
     const isValidPassword = await this.encryptContract.compare(
       password,
-      ShopKeeperInitial.password,
+      ShopKeeper.password,
     )
 
     if (!isValidPassword) {
       throw new UnauthorizedError('Invalid Email or Password')
     }
 
-    if (ShopKeeperInitial.contract?.expired) {
+    if (ShopKeeper.contract?.expired) {
       throw new UnauthorizedError('Contract Expired')
     }
 
-    if (ShopKeeperInitial.signature?.expired) {
+    if (ShopKeeper.signature?.expired) {
       throw new UnauthorizedError('Signature Expired')
     }
 
     this.notification.issue()
 
-    return ShopKeeperInitialMapper.toOutput(ShopKeeperInitial)
+    return ShopKeeperInitialMapper.toOutput(ShopKeeper)
   }
 }

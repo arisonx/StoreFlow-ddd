@@ -35,7 +35,7 @@ describe('RegisterShopKeeperInitialWithContractUseCase Unit Tests', () => {
 
     vi.clearAllMocks()
   })
-  it('Should register a ShopKeeperInitial with Contract', async () => {
+  it('Should register a ShopKeeper with Contract', async () => {
     ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(false)
     ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(false)
     const hashedPassword =

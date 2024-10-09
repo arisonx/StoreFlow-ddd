@@ -37,7 +37,7 @@ describe('RegisterShopKeeperInitialWithSignatureUseCase Unit Tests', () => {
     vi.clearAllMocks()
   })
 
-  it('Should register a ShopKeeperInitial with Starter Signature', async () => {
+  it('Should register a ShopKeeper with Starter Signature', async () => {
     ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(false)
     ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(false)
     const hashedPassword =
@@ -76,7 +76,7 @@ describe('RegisterShopKeeperInitialWithSignatureUseCase Unit Tests', () => {
     expect(outputDto.password).toEqual(hashedPassword)
   })
 
-  it('Should register a ShopKeeperInitial with Basic Signature', async () => {
+  it('Should register a ShopKeeper with Basic Signature', async () => {
     ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(false)
     ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(false)
     const hashedPassword =
@@ -115,7 +115,7 @@ describe('RegisterShopKeeperInitialWithSignatureUseCase Unit Tests', () => {
     expect(outputDto.password).toEqual(hashedPassword)
   })
 
-  it('Should register a ShopKeeperInitial with Premium Signature', async () => {
+  it('Should register a ShopKeeper with Premium Signature', async () => {
     ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(false)
     ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(false)
     const hashedPassword =

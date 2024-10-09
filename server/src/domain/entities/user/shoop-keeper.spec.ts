@@ -1,8 +1,8 @@
 import ShopKeeperInitialFactory from './factories/shoop-keeper.factory'
 import { SignaturePlanEnum } from './signature'
 
-describe('ShopKeeperInitial Unit Tests', () => {
-  it('Should throw an error if ShopKeeperInitial does not have Signature or Contract', () => {
+describe('ShopKeeper Unit Tests', () => {
+  it('Should throw an error if ShopKeeper does not have Signature or Contract', () => {
     expect(() => {
       ShopKeeperInitialFactory.withBasicCredentials({
         name: 'Luis Fernando',
@@ -14,7 +14,7 @@ describe('ShopKeeperInitial Unit Tests', () => {
     }).toThrow('Signature or Contract is Required')
   })
 
-  it('Should create a ShopKeeperInitial with a Signature', () => {
+  it('Should create a ShopKeeper with a Signature', () => {
     const data = {
       name: 'Luis Fernando',
       cpf: '63067078080',
@@ -27,25 +27,23 @@ describe('ShopKeeperInitial Unit Tests', () => {
       },
     }
 
-    const ShopKeeperInitial = ShopKeeperInitialFactory.withSignature(data)
+    const ShopKeeper = ShopKeeperInitialFactory.withSignature(data)
 
-    expect(ShopKeeperInitial).toBeTruthy()
-    expect(ShopKeeperInitial.name).toEqual(data.name)
-    expect(ShopKeeperInitial.cpf).toEqual(data.cpf)
-    expect(ShopKeeperInitial.email).toEqual(data.email)
-    expect(ShopKeeperInitial.password).toEqual(data.password)
-    expect(ShopKeeperInitial.rg).toEqual(data.rg)
-    expect(ShopKeeperInitial.signature).toBeTruthy()
+    expect(ShopKeeper).toBeTruthy()
+    expect(ShopKeeper.name).toEqual(data.name)
+    expect(ShopKeeper.cpf).toEqual(data.cpf)
+    expect(ShopKeeper.email).toEqual(data.email)
+    expect(ShopKeeper.password).toEqual(data.password)
+    expect(ShopKeeper.rg).toEqual(data.rg)
+    expect(ShopKeeper.signature).toBeTruthy()
 
-    if (ShopKeeperInitial.signature) {
-      expect(ShopKeeperInitial.signature.plan).toEqual(data.signature.plan)
-      expect(ShopKeeperInitial.signature.startDate).toEqual(
-        data.signature.startDate,
-      )
+    if (ShopKeeper.signature) {
+      expect(ShopKeeper.signature.plan).toEqual(data.signature.plan)
+      expect(ShopKeeper.signature.startDate).toEqual(data.signature.startDate)
     }
   })
 
-  it('Should create a ShopKeeperInitial with a Contract', () => {
+  it('Should create a ShopKeeper with a Contract', () => {
     const data = {
       name: 'Luis Fernando',
       cpf: '63067078080',
@@ -59,26 +57,24 @@ describe('ShopKeeperInitial Unit Tests', () => {
       },
     }
 
-    const ShopKeeperInitial = ShopKeeperInitialFactory.withContract(data)
+    const ShopKeeper = ShopKeeperInitialFactory.withContract(data)
 
-    expect(ShopKeeperInitial).toBeTruthy()
-    expect(ShopKeeperInitial.name).toEqual(data.name)
-    expect(ShopKeeperInitial.cpf).toEqual(data.cpf)
-    expect(ShopKeeperInitial.email).toEqual(data.email)
-    expect(ShopKeeperInitial.password).toEqual(data.password)
-    expect(ShopKeeperInitial.rg).toEqual(data.rg)
-    expect(ShopKeeperInitial.contract).toBeTruthy()
+    expect(ShopKeeper).toBeTruthy()
+    expect(ShopKeeper.name).toEqual(data.name)
+    expect(ShopKeeper.cpf).toEqual(data.cpf)
+    expect(ShopKeeper.email).toEqual(data.email)
+    expect(ShopKeeper.password).toEqual(data.password)
+    expect(ShopKeeper.rg).toEqual(data.rg)
+    expect(ShopKeeper.contract).toBeTruthy()
 
-    if (ShopKeeperInitial.contract) {
-      expect(ShopKeeperInitial.contract.startDate).toEqual(
-        data.contract.startDate,
-      )
-      expect(ShopKeeperInitial.contract.endDate).toEqual(data.contract.endDate)
-      expect(ShopKeeperInitial.contract.value).toEqual(data.contract.value)
+    if (ShopKeeper.contract) {
+      expect(ShopKeeper.contract.startDate).toEqual(data.contract.startDate)
+      expect(ShopKeeper.contract.endDate).toEqual(data.contract.endDate)
+      expect(ShopKeeper.contract.value).toEqual(data.contract.value)
     }
   })
 
-  it('Should throw an error if ShopKeeperInitial has both Signature and Contract', () => {
+  it('Should throw an error if ShopKeeper has both Signature and Contract', () => {
     const data = {
       name: 'Luis Fernando',
       cpf: '63067078080',

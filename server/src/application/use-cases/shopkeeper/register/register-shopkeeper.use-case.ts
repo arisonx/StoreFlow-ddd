@@ -23,14 +23,14 @@ export class RegisterShopKeeperInitialUseCase extends CommonUseCase {
 
     if (email) {
       this.notification.add({
-        context: 'ShopKeeperInitial Register',
+        context: 'ShopKeeper Register',
         error: new ConflictError('E-mail already exists'),
       })
     }
 
     if (cpf) {
       this.notification.add({
-        context: 'ShopKeeperInitial Register',
+        context: 'ShopKeeper Register',
         error: new ConflictError('CPF already exists'),
       })
     }

@@ -20,9 +20,9 @@ export default class RegisterShopKeeperInitialWithContractUseCase {
 
     dto.password = await this.encryptContract.hash(dto.password)
 
-    const ShopKeeperInitial = ShopKeeperInitialFactory.withContract(dto)
+    const ShopKeeper = ShopKeeperInitialFactory.withContract(dto)
 
-    await this.ShopKeeperInitialRepo.create(ShopKeeperInitial)
-    return ShopKeeperInitialMapper.toOutputWithContract(ShopKeeperInitial)
+    await this.ShopKeeperInitialRepo.create(ShopKeeper)
+    return ShopKeeperInitialMapper.toOutputWithContract(ShopKeeper)
   }
 }

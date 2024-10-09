@@ -23,7 +23,7 @@ describe('RegisterShopKeeperInitialUseCase Unit Tests', () => {
     vi.clearAllMocks()
   })
 
-  it('Should not register a ShopKeeperInitial if e-mail already exists', async () => {
+  it('Should not register a ShopKeeper if e-mail already exists', async () => {
     ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(false)
     ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(true)
 
@@ -34,10 +34,10 @@ describe('RegisterShopKeeperInitialUseCase Unit Tests', () => {
 
     await expect(
       registerShopKeeperInitialUseCase.execute(inputDto),
-    ).rejects.toThrow('ShopKeeperInitial Register: E-mail already exists')
+    ).rejects.toThrow('ShopKeeper Register: E-mail already exists')
   })
 
-  it('Should not register a ShopKeeperInitial if CPF already exists', async () => {
+  it('Should not register a ShopKeeper if CPF already exists', async () => {
     ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(false)
     ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(true)
 
@@ -48,10 +48,10 @@ describe('RegisterShopKeeperInitialUseCase Unit Tests', () => {
 
     await expect(
       registerShopKeeperInitialUseCase.execute(inputDto),
-    ).rejects.toThrow('ShopKeeperInitial Register: CPF already exists')
+    ).rejects.toThrow('ShopKeeper Register: CPF already exists')
   })
 
-  it('Should not register a ShopKeeperInitial if e-mail and cpf already exists', async () => {
+  it('Should not register a ShopKeeper if e-mail and cpf already exists', async () => {
     ShopKeeperInitialVitestRepo.emailAlreadyExists.mockReturnValue(true)
     ShopKeeperInitialVitestRepo.cpfAlreadyExists.mockReturnValue(true)
 
@@ -63,7 +63,7 @@ describe('RegisterShopKeeperInitialUseCase Unit Tests', () => {
     await expect(
       registerShopKeeperInitialUseCase.execute(inputDto),
     ).rejects.toThrow(
-      'ShopKeeperInitial Register: E-mail already exists, ShopKeeperInitial Register: CPF already exists',
+      'ShopKeeper Register: E-mail already exists, ShopKeeper Register: CPF already exists',
     )
   })
 })

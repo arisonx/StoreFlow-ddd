@@ -22,11 +22,11 @@ export class RegisterShopKeeperInitialWithSignatureUseCase {
 
     dto.password = await this.encryptContract.hash(dto.password)
 
-    const ShopKeeperInitial = ShopKeeperInitialFactory.withSignature(dto)
+    const ShopKeeper = ShopKeeperInitialFactory.withSignature(dto)
 
-    ShoopKeeperService.signaturePeriod(ShopKeeperInitial)
+    ShoopKeeperService.signaturePeriod(ShopKeeper)
 
-    await this.ShopKeeperInitialRepo.create(ShopKeeperInitial)
-    return ShopKeeperInitialMapper.toOutputWithSignature(ShopKeeperInitial)
+    await this.ShopKeeperInitialRepo.create(ShopKeeper)
+    return ShopKeeperInitialMapper.toOutputWithSignature(ShopKeeper)
   }
 }

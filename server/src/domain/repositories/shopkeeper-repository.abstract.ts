@@ -2,7 +2,7 @@ import IRepository, {
   IResourceListInputProps,
   IResourceListOutputProps,
 } from '@domain/base/repositories/base-repo.interface'
-import ShopKeeperInitial from '@domain/entities/user/shoop-keeper.entity'
+import ShopKeeper from '@domain/entities/user/shoop-keeper.entity'
 
 export interface IShopKeeperInitialListInputProps
   extends IResourceListInputProps {
@@ -10,25 +10,25 @@ export interface IShopKeeperInitialListInputProps
 }
 
 export default abstract class IShopKeeperInitialRepository
-  implements IRepository<ShopKeeperInitial, IShopKeeperInitialListInputProps>
+  implements IRepository<ShopKeeper, IShopKeeperInitialListInputProps>
 {
   abstract count(): Promise<number>
 
-  abstract findByEmail(email: string): Promise<ShopKeeperInitial | undefined>
+  abstract findByEmail(email: string): Promise<ShopKeeper | undefined>
 
   abstract emailAlreadyExists(email: string): Promise<boolean>
 
   abstract cpfAlreadyExists(cpf: string): Promise<boolean>
 
-  abstract create(entity: ShopKeeperInitial): Promise<void>
+  abstract create(entity: ShopKeeper): Promise<void>
 
   abstract delete(id: string): Promise<void>
 
-  abstract findOne(id: string): Promise<ShopKeeperInitial>
+  abstract findOne(id: string): Promise<ShopKeeper>
 
   abstract findAll(
     options: IShopKeeperInitialListInputProps,
-  ): Promise<IResourceListOutputProps<ShopKeeperInitial>>
+  ): Promise<IResourceListOutputProps<ShopKeeper>>
 
   abstract update(id: string): Promise<void>
 }

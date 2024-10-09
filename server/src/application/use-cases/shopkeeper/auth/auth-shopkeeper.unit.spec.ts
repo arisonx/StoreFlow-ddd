@@ -33,7 +33,7 @@ describe('AuthShopKeeperInitialUseCase Unit Tests', () => {
     vi.clearAllMocks()
   })
 
-  it('Should throw an error if ShopKeeperInitial not exists', async () => {
+  it('Should throw an error if ShopKeeper not exists', async () => {
     ShopKeeperInitialVitestRepo.findByEmail.mockResolvedValue(false)
     expect(async () => {
       await authShopKeeperInitialUseCase.execute({
@@ -65,7 +65,7 @@ describe('AuthShopKeeperInitialUseCase Unit Tests', () => {
     }).rejects.toThrow('Invalid Email or Password')
   })
 
-  it('Should throw an error if ShopKeeperInitial Contract is expired', async () => {
+  it('Should throw an error if ShopKeeper Contract is expired', async () => {
     ShopKeeperInitialVitestRepo.findByEmail.mockResolvedValue({
       id: '35c7c1b6-ada3-424d-b1b9-8c646b83ec23',
       name: 'Merian Cardoso',
@@ -89,7 +89,7 @@ describe('AuthShopKeeperInitialUseCase Unit Tests', () => {
     }).rejects.toThrow('Contract Expired')
   })
 
-  it('Should throw an error if ShopKeeperInitial Signature is expired', async () => {
+  it('Should throw an error if ShopKeeper Signature is expired', async () => {
     ShopKeeperInitialVitestRepo.findByEmail.mockResolvedValue({
       id: '35c7c1b6-ada3-424d-b1b9-8c646b83ec23',
       name: 'Merian Cardoso',
@@ -113,7 +113,7 @@ describe('AuthShopKeeperInitialUseCase Unit Tests', () => {
     }).rejects.toThrow('Signature Expired')
   })
 
-  it('Should authenticate a ShopKeeperInitial', async () => {
+  it('Should authenticate a ShopKeeper', async () => {
     ShopKeeperInitialVitestRepo.findByEmail.mockResolvedValue({
       id: '35c7c1b6-ada3-424d-b1b9-8c646b83ec23',
       name: 'Merian Cardoso',

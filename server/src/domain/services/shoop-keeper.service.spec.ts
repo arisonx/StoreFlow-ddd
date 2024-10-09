@@ -3,7 +3,7 @@ import CPF from '../entities/user/cpf'
 import Email from '../entities/user/email'
 import { Password } from '../entities/user/password'
 import RG from '../entities/user/rg'
-import ShopKeeperInitial from '../entities/user/shoop-keeper.entity'
+import ShopKeeper from '../entities/user/shoop-keeper.entity'
 import Signature, { SignaturePlanEnum } from '../entities/user/signature'
 import Usermame from '../entities/user/username'
 import { ShoopKeeperService } from './shoop-keeper.service'
@@ -12,7 +12,7 @@ describe('ShopKeeperInitialService unit unit tests', () => {
   it('Should add a starter signature period', () => {
     const signatureStartDate = new Date('2024-02-01')
     const signatureEndDate = new Date('2024-03-01')
-    const shoopKeeper = new ShopKeeperInitial({
+    const shoopKeeper = new ShopKeeper({
       id: randomUUID(),
       name: new Usermame('Luis 1'),
       signature: new Signature(SignaturePlanEnum.STARTER, signatureStartDate),
@@ -34,7 +34,7 @@ describe('ShopKeeperInitialService unit unit tests', () => {
   it('Should add a basic signature period', () => {
     const signatureStartDate = new Date('2024-02-01')
     const signatureEndDate = new Date('2024-08-01')
-    const shoopKeeper = new ShopKeeperInitial({
+    const shoopKeeper = new ShopKeeper({
       id: randomUUID(),
       name: new Usermame('Luis 2'),
       signature: new Signature(SignaturePlanEnum.BASIC, signatureStartDate),
@@ -56,7 +56,7 @@ describe('ShopKeeperInitialService unit unit tests', () => {
   it('Should add a premium signature period', () => {
     const signatureStartDate = new Date('2024-02-01')
     const signatureEndDate = new Date('2025-02-01')
-    const shoopKeeper = new ShopKeeperInitial({
+    const shoopKeeper = new ShopKeeper({
       id: randomUUID(),
       name: new Usermame('Luis 3'),
       signature: new Signature(SignaturePlanEnum.PREMIUM, signatureStartDate),

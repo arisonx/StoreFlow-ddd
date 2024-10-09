@@ -1,85 +1,85 @@
-import ShopKeeperInitial from '@domain/entities/user/shoop-keeper.entity'
+import ShopKeeper from '@domain/entities/user/shoop-keeper.entity'
 
 export class ShopKeeperInitialMapper {
-  public static toOutput(ShopKeeperInitial: ShopKeeperInitial) {
-    const hasSignature = ShopKeeperInitial.signature && {
+  public static toOutput(ShopKeeper: ShopKeeper) {
+    const hasSignature = ShopKeeper.signature && {
       signature: {
-        startDate: ShopKeeperInitial.signature?.startDate,
-        endDate: ShopKeeperInitial.signature?.endDate,
-        plan: ShopKeeperInitial.signature?.plan,
+        startDate: ShopKeeper.signature?.startDate,
+        endDate: ShopKeeper.signature?.endDate,
+        plan: ShopKeeper.signature?.plan,
       },
     }
 
-    const hasContract = ShopKeeperInitial.contract && {
+    const hasContract = ShopKeeper.contract && {
       contract: {
-        startDate: ShopKeeperInitial.contract.startDate,
-        endDate: ShopKeeperInitial.contract.endDate,
-        value: ShopKeeperInitial.contract.value,
+        startDate: ShopKeeper.contract.startDate,
+        endDate: ShopKeeper.contract.endDate,
+        value: ShopKeeper.contract.value,
       },
     }
 
     return {
-      id: ShopKeeperInitial.id,
-      name: ShopKeeperInitial.name,
-      cpf: ShopKeeperInitial.cpf,
-      email: ShopKeeperInitial.email,
-      rg: ShopKeeperInitial.rg,
+      id: ShopKeeper.id,
+      name: ShopKeeper.name,
+      cpf: ShopKeeper.cpf,
+      email: ShopKeeper.email,
+      rg: ShopKeeper.rg,
       ...hasSignature,
       ...hasContract,
     }
   }
 
-  public static toOutputWithSignature(ShopKeeperInitial: ShopKeeperInitial) {
-    if (ShopKeeperInitial.signature) {
+  public static toOutputWithSignature(ShopKeeper: ShopKeeper) {
+    if (ShopKeeper.signature) {
       return {
-        id: ShopKeeperInitial.id,
-        name: ShopKeeperInitial.name,
-        cpf: ShopKeeperInitial.cpf,
-        password: ShopKeeperInitial.password,
-        email: ShopKeeperInitial.email,
-        rg: ShopKeeperInitial.rg,
+        id: ShopKeeper.id,
+        name: ShopKeeper.name,
+        cpf: ShopKeeper.cpf,
+        password: ShopKeeper.password,
+        email: ShopKeeper.email,
+        rg: ShopKeeper.rg,
         signature: {
-          startDate: ShopKeeperInitial.signature.startDate,
-          endDate: ShopKeeperInitial.signature.endDate,
-          plan: ShopKeeperInitial.signature.plan,
+          startDate: ShopKeeper.signature.startDate,
+          endDate: ShopKeeper.signature.endDate,
+          plan: ShopKeeper.signature.plan,
         },
       }
     }
 
     return {
-      id: ShopKeeperInitial.id,
-      name: ShopKeeperInitial.name,
-      cpf: ShopKeeperInitial.cpf,
-      password: ShopKeeperInitial.password,
-      email: ShopKeeperInitial.email,
-      rg: ShopKeeperInitial.rg,
+      id: ShopKeeper.id,
+      name: ShopKeeper.name,
+      cpf: ShopKeeper.cpf,
+      password: ShopKeeper.password,
+      email: ShopKeeper.email,
+      rg: ShopKeeper.rg,
     }
   }
 
-  public static toOutputWithContract(ShopKeeperInitial: ShopKeeperInitial) {
-    if (ShopKeeperInitial.contract) {
+  public static toOutputWithContract(ShopKeeper: ShopKeeper) {
+    if (ShopKeeper.contract) {
       return {
-        id: ShopKeeperInitial.id,
-        name: ShopKeeperInitial.name,
-        cpf: ShopKeeperInitial.cpf,
-        password: ShopKeeperInitial.password,
-        email: ShopKeeperInitial.email,
-        rg: ShopKeeperInitial.rg,
+        id: ShopKeeper.id,
+        name: ShopKeeper.name,
+        cpf: ShopKeeper.cpf,
+        password: ShopKeeper.password,
+        email: ShopKeeper.email,
+        rg: ShopKeeper.rg,
         contract: {
-          startDate: ShopKeeperInitial.contract.startDate,
-          endDate: ShopKeeperInitial.contract.endDate,
-          value: ShopKeeperInitial.contract.value,
+          startDate: ShopKeeper.contract.startDate,
+          endDate: ShopKeeper.contract.endDate,
+          value: ShopKeeper.contract.value,
         },
       }
     }
 
     return {
-      id: ShopKeeperInitial.id,
-      name: ShopKeeperInitial.name,
-      cpf: ShopKeeperInitial.cpf,
-      password: ShopKeeperInitial.password,
-      email: ShopKeeperInitial.email,
-      rg: ShopKeeperInitial.rg,
+      id: ShopKeeper.id,
+      name: ShopKeeper.name,
+      cpf: ShopKeeper.cpf,
+      password: ShopKeeper.password,
+      email: ShopKeeper.email,
+      rg: ShopKeeper.rg,
     }
   }
 }
