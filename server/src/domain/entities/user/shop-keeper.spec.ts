@@ -1,4 +1,4 @@
-import ShopKeeperFactory from './factories/shoop-keeper.factory'
+import ShopKeeperFactory from './factories/shop-keeper.factory'
 import { SignaturePlanEnum } from './signature'
 
 describe('ShopKeeper Unit Tests', () => {

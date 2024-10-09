@@ -1,4 +1,4 @@
-import ShopKeeper from '@domain/entities/user/shoop-keeper.entity'
+import ShopKeeper from '@domain/entities/user/shop-keeper.entity'
 
 export class ShopKeeperMapper {
   public static toOutput(ShopKeeper: ShopKeeper) {

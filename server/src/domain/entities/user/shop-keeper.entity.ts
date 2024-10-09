@@ -3,7 +3,7 @@ import { Contract } from './contract'
 import Signature from './signature'
 import User, { IUserCreationProps } from './user.entity'
 
-interface IShoopKeeperCreationProps extends IUserCreationProps {
+interface IShopKeeperCreationProps extends IUserCreationProps {
   signature?: Signature
   contract?: Contract
 }
@@ -13,7 +13,7 @@ export default class ShopKeeper extends User {
   private _signature?: Signature
   private _contract?: Contract
 
-  constructor(props: IShoopKeeperCreationProps) {
+  constructor(props: IShopKeeperCreationProps) {
     super(props)
     this._signature = props.signature
     this._contract = props.contract

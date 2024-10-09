@@ -1,8 +1,7 @@
 import EncryptContract from '@application/contracts/encrypt.interface'
-import ShopKeeperFactory from '@domain/entities/user/factories/shoop-keeper.factory'
-
+import ShopKeeperFactory from '@domain/entities/user/factories/shop-keeper.factory'
 import IShopKeeperRepository from '@domain/repositories/shopkeeper-repository.abstract'
-import { ShoopKeeperService } from '@domain/services/shoop-keeper.service'
+import { ShopKeeperService } from '@domain/services/shop-keeper.service'
 import { ShopKeeperMapper } from '../shop-keeper.mapper'
 import IRegisterShopKeeperWithSignatureInputProps from './dto/with-signature-input.interface'
 import { RegisterShopKeeperUseCase } from './register-shopkeeper.use-case'
@@ -24,7 +23,7 @@ export class RegisterShopKeeperWithSignatureUseCase {
 
     const ShopKeeper = ShopKeeperFactory.withSignature(dto)
 
-    ShoopKeeperService.signaturePeriod(ShopKeeper)
+    ShopKeeperService.signaturePeriod(ShopKeeper)
 
     await this.ShopKeeperRepo.create(ShopKeeper)
     return ShopKeeperMapper.toOutputWithSignature(ShopKeeper)

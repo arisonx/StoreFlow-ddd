@@ -1,4 +1,4 @@
-import ShopKeeperFactory from '@domain/entities/user/factories/shoop-keeper.factory'
+import ShopKeeperFactory from '@domain/entities/user/factories/shop-keeper.factory'
 import { SignaturePlanEnum } from '@domain/entities/user/signature'
 import { ListShopKeeperUseCase } from './list-shopkeeper.use-case'
 

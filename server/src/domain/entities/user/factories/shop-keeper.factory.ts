@@ -4,7 +4,7 @@ import CPF from '../cpf'
 import Email from '../email'
 import { Password } from '../password'
 import RG from '../rg'
-import ShopKeeper from '../shoop-keeper.entity'
+import ShopKeeper from '../shop-keeper.entity'
 import Signature, { SignaturePlanEnum } from '../signature'
 import Username from '../username'
 
