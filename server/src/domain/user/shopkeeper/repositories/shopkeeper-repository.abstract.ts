@@ -2,8 +2,8 @@ import IRepository, {
   IResourceListInputProps,
   IResourceListOutputProps,
 } from '@domain/@shared/repositories/base-repo.interface'
-import ContractShopKeeper from '@domain/entities/user/contract_shopkeeper/contract-shop-keeper.entity'
-import SignatureShopKeeper from '@domain/entities/user/signature_shopkeeper/signature-shop-keeper.entity'
+import ContractShopKeeper from '../contract/contract-shop-keeper.entity'
+import SignatureShopKeeper from '../signature/signature-shop-keeper.entity'
 export interface IShopKeeperListInputProps extends IResourceListInputProps {
   name?: string
 }

@@ -1,6 +1,5 @@
 import { BaseDomainEntity } from '@domain/@shared/entities/base-domain-entity'
-import { CartProduct } from '../cart_products/cart-products.entity'
-
+import { CartProduct } from '@domain/cart_products/entity/cart-products.entity'
 export interface ICart {
   id: string
   userId: string
