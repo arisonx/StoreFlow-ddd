@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto'
-import { CartProduct } from '../cart_products/cart-products.entity'
+import { CartProduct } from '../../cart_products/entity/cart-products.entity'
 import Cart from './cart.entity'
 
 describe('Cart unit tests', () => {

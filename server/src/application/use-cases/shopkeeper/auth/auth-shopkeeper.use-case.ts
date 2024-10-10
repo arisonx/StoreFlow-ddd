@@ -1,11 +1,11 @@
 import CommonUseCase from '@application/@shared/base.use-case'
 import EncryptContract from '@application/contracts/encrypt.interface'
-import UnauthorizedError from '@domain/base/errors/unauthorized-error'
-import IShopKeeperRepository from '@domain/repositories/shopkeeper-repository.abstract'
+import UnauthorizedError from '@domain/@shared/errors/unauthorized-error'
+import IShopKeeperRepository from '@domain/user/shopkeeper/repositories/shopkeeper-repository.abstract'
 import { IAuthShopKeeperInputDto } from './dto/input.dto'
 import { IAuthShopKeeperOutputDto } from './dto/output.dto'
-import ContractShopKeeper from '@domain/entities/user/shopkeeper/contract/contract-shop-keeper.entity'
-import SignatureShopKeeper from '@domain/entities/user/shopkeeper/signature/signature-shop-keeper.entity'
+import ContractShopKeeper from '@domain/user/shopkeeper/contract/contract-shop-keeper.entity'
+import SignatureShopKeeper from '@domain/user/shopkeeper/signature/signature-shop-keeper.entity'
 export class AuthShopKeeperUseCase extends CommonUseCase {
   constructor(
     private readonly ShopKeeperRepo: IShopKeeperRepository,

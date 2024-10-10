@@ -1,5 +1,5 @@
-import ShopKeeperFactory from '@domain/entities/user/@shared/factories/shop-keeper.factory'
-import { SignaturePlanEnum } from '@domain/entities/user/shopkeeper/signature/signature'
+import ShopKeeperFactory from '@domain/user/@shared/factories/shop-keeper.factory'
+import { SignaturePlanEnum } from '@domain/user/shopkeeper/signature/signature'
 import { ListShopKeeperUseCase } from './list-shopkeeper.use-case'
 
 const ShopKeeper1 = {

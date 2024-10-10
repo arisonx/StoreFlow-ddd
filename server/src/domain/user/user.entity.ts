@@ -1,9 +1,9 @@
-import { BaseDomainEntity } from '../../base/entities/base-domain-entity'
-import CPF from './cpf'
-import Email from './email'
-import { Password } from './password'
-import RG from './rg'
-import Name from './username'
+import { BaseDomainEntity } from '../@shared/entities/base-domain-entity'
+import CPF from './value_objects/cpf'
+import Email from './value_objects/email'
+import { Password } from './value_objects/password'
+import RG from './value_objects/rg'
+import Name from './value_objects/username'
 
 export interface IUserCreationProps {
   id: string

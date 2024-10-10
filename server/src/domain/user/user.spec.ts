@@ -1,10 +1,10 @@
 import { randomUUID } from 'node:crypto'
-import CPF from './cpf'
-import Email from './email'
-import { Password } from './password'
-import RG from './rg'
+import CPF from './value_objects/cpf'
+import Email from './value_objects/email'
+import { Password } from './value_objects/password'
+import RG from './value_objects/rg'
 import User from './user.entity'
-import Usermame from './username'
+import Usermame from './value_objects/username'
 
 describe('User unit tests', () => {
   it('Should throw error if usermame is more than 255 caracteres', () => {

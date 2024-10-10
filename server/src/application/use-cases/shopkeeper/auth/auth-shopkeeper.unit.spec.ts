@@ -1,6 +1,6 @@
-import { SignaturePlanEnum } from '@domain/entities/user/shopkeeper/signature/signature'
+import { SignaturePlanEnum } from '@domain/user/shopkeeper/signature/signature'
 import { AuthShopKeeperUseCase } from './auth-shopkeeper.use-case'
-import ShopKeeperFactory from '@domain/entities/user/@shared/factories/shop-keeper.factory'
+import ShopKeeperFactory from '@domain/user/@shared/factories/shop-keeper.factory'
 
 const ShopKeeperVitestRepo = {
   findOne: vi.fn(),

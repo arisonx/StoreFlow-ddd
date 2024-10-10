@@ -1,11 +1,11 @@
 import { randomUUID } from 'crypto'
 import SignatureShopKeeper from '../signature-shop-keeper.entity'
-import Usermame from '@domain/entities/user/username'
+import Usermame from '@domain/user/value_objects/username'
 import Signature, { SignaturePlanEnum } from '../signature'
-import CPF from '@domain/entities/user/cpf'
-import { Password } from '@domain/entities/user/password'
-import Email from '@domain/entities/user/email'
-import RG from '@domain/entities/user/rg'
+import CPF from '@domain/user/value_objects/cpf'
+import { Password } from '@domain/user/value_objects/password'
+import Email from '@domain/user/value_objects/email'
+import RG from '@domain/user/value_objects/rg'
 import { SignatureShopKeeperService } from './signature-shop-keeper.service'
 describe('SignatureShopKeeperService unit unit tests', () => {
   it('Should add a starter signature period', () => {

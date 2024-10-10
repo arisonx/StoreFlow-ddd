@@ -1,6 +1,6 @@
-import Adress from '@domain/base/entities/adress'
-import { BaseDomainEntity } from '@domain/base/entities/base-domain-entity'
-import CNPJ from './cpnj'
+import Adress from '@domain/@shared/value_objects/adress'
+import { BaseDomainEntity } from '@domain/@shared/entities/base-domain-entity'
+import CNPJ from './value_objects/cpnj'
 
 export default class Store extends BaseDomainEntity {
   _name: string

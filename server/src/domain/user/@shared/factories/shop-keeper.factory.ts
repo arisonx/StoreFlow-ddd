@@ -1,11 +1,11 @@
 import { randomUUID } from 'node:crypto'
-import CPF from '../../cpf'
-import Email from '../../email'
-import { Password } from '../../password'
-import RG from '../../rg'
+import CPF from '../../value_objects/cpf'
+import Email from '../../value_objects/email'
+import { Password } from '../../value_objects/password'
+import RG from '../../value_objects/rg'
 import ContractShopKeeper from '../../shopkeeper/contract/contract-shop-keeper.entity'
-import Username from '../../username'
-import { IBaseUserCreationProps } from '../../@shared/interfaces/user.interface'
+import Username from '../../value_objects/username'
+import { IBaseUserCreationProps } from '../interfaces/user.interface'
 import { Contract } from '../../shopkeeper/contract/contract'
 import Signature, {
   SignaturePlanEnum,
