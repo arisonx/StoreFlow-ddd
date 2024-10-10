@@ -1,4 +1,4 @@
-import { NotificationError } from '@domain/base/errors/notification-error'
+import { NotificationError } from '@domain/@shared/errors/notification-error'
 
 interface INotificationProps<T> {
   context: string

@@ -1,7 +1,7 @@
 import EncryptContract from '@application/contracts/encrypt.interface'
-import ShopKeeperFactory from '@domain/entities/user/factories/shop-keeper.factory'
-import IShopKeeperRepository from '@domain/repositories/shopkeeper-repository.abstract'
-import { ShopKeeperMapper } from '../shop-keeper.mapper'
+import ShopKeeperFactory from '@domain/user/@shared/factories/shop-keeper.factory'
+import IShopKeeperRepository from '@domain/user/shopkeeper/repositories/shopkeeper-repository.abstract'
+import { ShopKeeperMapper } from '../../../../domain/user/@shared/mapper/shop-keeper.mapper'
 import IRegisterShopKeeperWithContractInputProps from './dto/input.interface'
 import { RegisterShopKeeperUseCase } from './register-shopkeeper.use-case'
 

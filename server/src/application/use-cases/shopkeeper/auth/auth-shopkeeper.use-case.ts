@@ -1,10 +1,11 @@
 import CommonUseCase from '@application/@shared/base.use-case'
 import EncryptContract from '@application/contracts/encrypt.interface'
-import UnauthorizedError from '@domain/base/errors/unauthorized-error'
-import IShopKeeperRepository from '@domain/repositories/shopkeeper-repository.abstract'
-import { ShopKeeperMapper } from '../shop-keeper.mapper'
+import UnauthorizedError from '@domain/@shared/errors/unauthorized-error'
+import IShopKeeperRepository from '@domain/user/shopkeeper/repositories/shopkeeper-repository.abstract'
 import { IAuthShopKeeperInputDto } from './dto/input.dto'
 import { IAuthShopKeeperOutputDto } from './dto/output.dto'
+import ContractShopKeeper from '@domain/user/shopkeeper/contract/contract-shop-keeper.entity'
+import SignatureShopKeeper from '@domain/user/shopkeeper/signature/signature-shop-keeper.entity'
 export class AuthShopKeeperUseCase extends CommonUseCase {
   constructor(
     private readonly ShopKeeperRepo: IShopKeeperRepository,
@@ -16,31 +17,38 @@ export class AuthShopKeeperUseCase extends CommonUseCase {
     email,
     password,
   }: IAuthShopKeeperInputDto): Promise<IAuthShopKeeperOutputDto> {
-    const ShopKeeper = await this.ShopKeeperRepo.findByEmail(email)
+    const shopKeeper = await this.ShopKeeperRepo.findByEmail(email)
 
-    if (!ShopKeeper) {
+    const signatureShopKeeper = shopKeeper instanceof SignatureShopKeeper
+
+    const contractShopKeeper = shopKeeper instanceof ContractShopKeeper
+
+    if (!shopKeeper) {
       throw new UnauthorizedError('Invalid Email or Password')
     }
 
     const isValidPassword = await this.encryptContract.compare(
       password,
-      ShopKeeper.password,
+      shopKeeper.password,
     )
 
     if (!isValidPassword) {
       throw new UnauthorizedError('Invalid Email or Password')
     }
 
-    if (ShopKeeper.contract?.expired) {
+    if (contractShopKeeper && shopKeeper.contract.expired) {
       throw new UnauthorizedError('Contract Expired')
     }
 
-    if (ShopKeeper.signature?.expired) {
+    if (signatureShopKeeper && shopKeeper.signature.expired) {
       throw new UnauthorizedError('Signature Expired')
     }
 
     this.notification.issue()
 
-    return ShopKeeperMapper.toOutput(ShopKeeper)
+    return {
+      name: shopKeeper.name,
+      email: shopKeeper.email,
+    }
   }
 }

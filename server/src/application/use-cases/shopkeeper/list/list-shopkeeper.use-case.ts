@@ -1,12 +1,10 @@
 import IShopKeeperRepository, {
   IShopKeeperListInputProps,
-} from '@domain/repositories/shopkeeper-repository.abstract'
-import { ShopKeeperMapper } from '../shop-keeper.mapper'
+} from '@domain/user/shopkeeper/repositories/shopkeeper-repository.abstract'
+import { ShopKeeperMapper } from '../../../../domain/user/@shared/mapper/shop-keeper.mapper'
 import { IListShopKeeperInputDto } from './dto/input'
-
 export class ListShopKeeperUseCase {
   constructor(private readonly ShopKeeperRepo: IShopKeeperRepository) {}
-
   async execute(dto?: IListShopKeeperInputDto) {
     const input: IShopKeeperListInputProps = {
       all: dto?.all,
