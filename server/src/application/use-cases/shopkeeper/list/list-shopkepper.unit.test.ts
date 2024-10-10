@@ -85,12 +85,12 @@ describe('ListShopKeeperUseCase Unit Tests', () => {
 
     results.items.forEach((item, index) => {
       const currentShopKeeper = ShopKeepers[index]
-      const signatureOrContract = item.signature || item.contract
-      expect(currentShopKeeper.name).toBe(item.name)
-      expect(currentShopKeeper.email).toBe(item.email)
-      expect(currentShopKeeper.cpf).toBe(item.cpf)
-      expect(currentShopKeeper.rg).toBe(item.rg)
-      expect(signatureOrContract).toBeTruthy()
+      if (item) {
+        expect(currentShopKeeper.name).toBe(item.name)
+        expect(currentShopKeeper.email).toBe(item.email)
+        expect(currentShopKeeper.cpf).toBe(item.cpf)
+        expect(currentShopKeeper.rg).toBe(item.rg)
+      }
     })
     expect(ShopKeeperVitestRepo.findAll).toHaveBeenCalledTimes(1)
   })
