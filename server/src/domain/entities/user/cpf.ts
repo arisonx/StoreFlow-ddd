@@ -1,5 +1,4 @@
 import { cpf } from 'cpf-cnpj-validator'
-
 export default class CPF {
   _value: string
 

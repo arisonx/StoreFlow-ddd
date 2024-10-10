@@ -31,7 +31,7 @@ export default class Signature {
 
   get expired() {
     if (!this._endDate) {
-      return false
+      return true
     }
     const currentDate = new Date()
     return currentDate > this._endDate

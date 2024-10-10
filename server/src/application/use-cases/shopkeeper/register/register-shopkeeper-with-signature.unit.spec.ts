@@ -1,4 +1,4 @@
-import { SignaturePlanEnum } from '@domain/entities/user/signature'
+import { SignaturePlanEnum } from '@domain/entities/user/shopkeeper/signature/signature'
 import { RegisterShopKeeperWithSignatureUseCase } from './register-shopkeeper-with-signature.use-case'
 import { RegisterShopKeeperUseCase } from './register-shopkeeper.use-case'
 

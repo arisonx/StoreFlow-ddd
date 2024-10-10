@@ -1,5 +1,4 @@
 import { Contract, IContractConstructorProps } from './contract'
-
 describe('Contract unit tests', () => {
   it('Should throw error if startDate is invalid', () => {
     expect(() => {

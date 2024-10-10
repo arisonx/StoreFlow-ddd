@@ -1,7 +1,6 @@
 import CommonUseCase from '@application/@shared/base.use-case'
 import ConflictError from '@domain/base/errors/conflict-error'
 import IShopKeeperRepository from '@domain/repositories/shopkeeper-repository.abstract'
-
 export interface IRegisterShopKeeperInputDto {
   email: string
   cpf: string

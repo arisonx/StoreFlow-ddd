@@ -1,5 +1,6 @@
-import { SignaturePlanEnum } from '@domain/entities/user/signature'
+import { SignaturePlanEnum } from '@domain/entities/user/shopkeeper/signature/signature'
 import { AuthShopKeeperUseCase } from './auth-shopkeeper.use-case'
+import ShopKeeperFactory from '@domain/entities/user/@shared/factories/shop-keeper.factory'
 
 const ShopKeeperVitestRepo = {
   findOne: vi.fn(),
@@ -66,20 +67,20 @@ describe('AuthShopKeeperUseCase Unit Tests', () => {
   })
 
   it('Should throw an error if ShopKeeper Contract is expired', async () => {
-    ShopKeeperVitestRepo.findByEmail.mockResolvedValue({
-      id: '35c7c1b6-ada3-424d-b1b9-8c646b83ec23',
-      name: 'Merian Cardoso',
-      cpf: '63067078080',
-      email: 'merian.cardoso@example.com',
-      password: 'AnotherP@ssw0rd',
-      rg: '123456789',
-      contract: {
-        startDate: new Date('2024-08-30'),
-        expired: true,
-        endDate: new Date(),
-        plan: SignaturePlanEnum.BASIC,
-      },
-    })
+    ShopKeeperVitestRepo.findByEmail.mockResolvedValue(
+      ShopKeeperFactory.withContract({
+        name: 'Merian Cardoso',
+        cpf: '63067078080',
+        email: 'merian.cardoso@example.com',
+        password: 'AnotherP@ssw0rd',
+        rg: '123456789',
+        contract: {
+          startDate: new Date('2023-08-30'),
+          endDate: new Date(),
+          value: 2000,
+        },
+      }),
+    )
     mockBcryptAdapter.compare.mockResolvedValue(true)
     expect(async () => {
       await authShopKeeperUseCase.execute({
@@ -90,20 +91,19 @@ describe('AuthShopKeeperUseCase Unit Tests', () => {
   })
 
   it('Should throw an error if ShopKeeper Signature is expired', async () => {
-    ShopKeeperVitestRepo.findByEmail.mockResolvedValue({
-      id: '35c7c1b6-ada3-424d-b1b9-8c646b83ec23',
-      name: 'Merian Cardoso',
-      cpf: '63067078080',
-      email: 'merian.cardoso@example.com',
-      password: 'AnotherP@ssw0rd',
-      rg: '123456789',
-      signature: {
-        startDate: new Date('2024-09-15'),
-        expired: true,
-        endDate: new Date('2025-09-15'),
-        plan: SignaturePlanEnum.PREMIUM,
-      },
-    })
+    ShopKeeperVitestRepo.findByEmail.mockResolvedValue(
+      ShopKeeperFactory.withSignature({
+        name: 'Merian Cardoso',
+        cpf: '63067078080',
+        email: 'merian.cardoso@example.com',
+        password: 'AnotherP@ssw0rd',
+        rg: '123456789',
+        signature: {
+          startDate: new Date('2022-09-15'),
+          plan: SignaturePlanEnum.PREMIUM,
+        },
+      }),
+    )
     mockBcryptAdapter.compare.mockResolvedValue(true)
     expect(async () => {
       await authShopKeeperUseCase.execute({
