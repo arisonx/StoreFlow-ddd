@@ -1,7 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { RegisterShopKeeperUseCase } from './register-shopkeeper.use-case'
 
-const shopKeeperVitestRepo = {
+const ShopKeeperVitestRepo = {
   findOne: vi.fn(),
   findAll: vi.fn(),
   create: vi.fn(),
@@ -18,15 +17,15 @@ describe('RegisterShopKeeperUseCase Unit Tests', () => {
 
   beforeEach(() => {
     registerShopKeeperUseCase = new RegisterShopKeeperUseCase(
-      shopKeeperVitestRepo,
+      ShopKeeperVitestRepo,
     )
 
     vi.clearAllMocks()
   })
 
   it('Should not register a ShopKeeper if e-mail already exists', async () => {
-    shopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(false)
-    shopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(true)
+    ShopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(false)
+    ShopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(true)
 
     const inputDto = {
       cpf: '63067078080',
@@ -39,8 +38,8 @@ describe('RegisterShopKeeperUseCase Unit Tests', () => {
   })
 
   it('Should not register a ShopKeeper if CPF already exists', async () => {
-    shopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(false)
-    shopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(true)
+    ShopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(false)
+    ShopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(true)
 
     const inputDto = {
       cpf: '63067078080',
@@ -53,8 +52,8 @@ describe('RegisterShopKeeperUseCase Unit Tests', () => {
   })
 
   it('Should not register a ShopKeeper if e-mail and cpf already exists', async () => {
-    shopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(true)
-    shopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(true)
+    ShopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(true)
+    ShopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(true)
 
     const inputDto = {
       cpf: '63067078080',

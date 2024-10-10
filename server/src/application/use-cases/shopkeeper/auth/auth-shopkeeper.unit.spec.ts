@@ -1,9 +1,7 @@
-import { describe, it, beforeAll, beforeEach } from 'vitest'
+import { SignaturePlanEnum } from '@domain/entities/user/signature'
 import { AuthShopKeeperUseCase } from './auth-shopkeeper.use-case'
-import { SignaturePlanEnum } from 'domain/entities/user/signature'
-import { randomUUID } from 'crypto'
 
-const shopKeeperVitestRepo = {
+const ShopKeeperVitestRepo = {
   findOne: vi.fn(),
   findAll: vi.fn(),
   create: vi.fn(),
@@ -25,7 +23,7 @@ describe('AuthShopKeeperUseCase Unit Tests', () => {
 
   beforeAll(() => {
     authShopKeeperUseCase = new AuthShopKeeperUseCase(
-      shopKeeperVitestRepo,
+      ShopKeeperVitestRepo,
       mockBcryptAdapter,
     )
     vi.clearAllMocks()
@@ -36,7 +34,7 @@ describe('AuthShopKeeperUseCase Unit Tests', () => {
   })
 
   it('Should throw an error if ShopKeeper not exists', async () => {
-    shopKeeperVitestRepo.findByEmail.mockResolvedValue(false)
+    ShopKeeperVitestRepo.findByEmail.mockResolvedValue(false)
     expect(async () => {
       await authShopKeeperUseCase.execute({
         email: 'merian.cardoso@example.com',
@@ -46,7 +44,7 @@ describe('AuthShopKeeperUseCase Unit Tests', () => {
   })
 
   it('Should throw an error if CPF is not valid', async () => {
-    shopKeeperVitestRepo.findByEmail.mockResolvedValue({
+    ShopKeeperVitestRepo.findByEmail.mockResolvedValue({
       name: 'Merian Cardoso',
       cpf: '63067078080',
       email: 'merian.cardoso@example.com',
@@ -68,7 +66,7 @@ describe('AuthShopKeeperUseCase Unit Tests', () => {
   })
 
   it('Should throw an error if ShopKeeper Contract is expired', async () => {
-    shopKeeperVitestRepo.findByEmail.mockResolvedValue({
+    ShopKeeperVitestRepo.findByEmail.mockResolvedValue({
       id: '35c7c1b6-ada3-424d-b1b9-8c646b83ec23',
       name: 'Merian Cardoso',
       cpf: '63067078080',
@@ -92,7 +90,7 @@ describe('AuthShopKeeperUseCase Unit Tests', () => {
   })
 
   it('Should throw an error if ShopKeeper Signature is expired', async () => {
-    shopKeeperVitestRepo.findByEmail.mockResolvedValue({
+    ShopKeeperVitestRepo.findByEmail.mockResolvedValue({
       id: '35c7c1b6-ada3-424d-b1b9-8c646b83ec23',
       name: 'Merian Cardoso',
       cpf: '63067078080',
@@ -116,7 +114,7 @@ describe('AuthShopKeeperUseCase Unit Tests', () => {
   })
 
   it('Should authenticate a ShopKeeper', async () => {
-    shopKeeperVitestRepo.findByEmail.mockResolvedValue({
+    ShopKeeperVitestRepo.findByEmail.mockResolvedValue({
       id: '35c7c1b6-ada3-424d-b1b9-8c646b83ec23',
       name: 'Merian Cardoso',
       cpf: '63067078080',
@@ -135,7 +133,7 @@ describe('AuthShopKeeperUseCase Unit Tests', () => {
       email: 'merian.cardoso@example.com',
       password: 'AnotherP@ssw0rd',
     })
-    expect(shopKeeperVitestRepo.findByEmail).toBeCalledWith(
+    expect(ShopKeeperVitestRepo.findByEmail).toBeCalledWith(
       'merian.cardoso@example.com',
     )
     expect(output).toBeTruthy()

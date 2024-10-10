@@ -1,63 +1,85 @@
-import ShopKeeper from 'domain/entities/user/shoop-keeper.entity'
+import ShopKeeper from '@domain/entities/user/shop-keeper.entity'
 
 export class ShopKeeperMapper {
-  public static toOutput(shopKeeper: ShopKeeper) {
-    const hasSignature = shopKeeper.signature && {
+  public static toOutput(ShopKeeper: ShopKeeper) {
+    const hasSignature = ShopKeeper.signature && {
       signature: {
-        startDate: shopKeeper.signature?.startDate,
-        endDate: shopKeeper.signature?.endDate,
-        plan: shopKeeper.signature?.plan,
+        startDate: ShopKeeper.signature?.startDate,
+        endDate: ShopKeeper.signature?.endDate,
+        plan: ShopKeeper.signature?.plan,
       },
     }
 
-    const hasContract = shopKeeper.contract && {
+    const hasContract = ShopKeeper.contract && {
       contract: {
-        startDate: shopKeeper.contract.startDate,
-        endDate: shopKeeper.contract.endDate,
-        value: shopKeeper.contract.value,
+        startDate: ShopKeeper.contract.startDate,
+        endDate: ShopKeeper.contract.endDate,
+        value: ShopKeeper.contract.value,
       },
     }
 
     return {
-      id: shopKeeper.id,
-      name: shopKeeper.name,
-      cpf: shopKeeper.cpf,
-      email: shopKeeper.email,
-      rg: shopKeeper.rg,
+      id: ShopKeeper.id,
+      name: ShopKeeper.name,
+      cpf: ShopKeeper.cpf,
+      email: ShopKeeper.email,
+      rg: ShopKeeper.rg,
       ...hasSignature,
       ...hasContract,
     }
   }
 
-  public static toOutputWithSignature(shopKeeper: ShopKeeper) {
+  public static toOutputWithSignature(ShopKeeper: ShopKeeper) {
+    if (ShopKeeper.signature) {
+      return {
+        id: ShopKeeper.id,
+        name: ShopKeeper.name,
+        cpf: ShopKeeper.cpf,
+        password: ShopKeeper.password,
+        email: ShopKeeper.email,
+        rg: ShopKeeper.rg,
+        signature: {
+          startDate: ShopKeeper.signature.startDate,
+          endDate: ShopKeeper.signature.endDate,
+          plan: ShopKeeper.signature.plan,
+        },
+      }
+    }
+
     return {
-      id: shopKeeper.id,
-      name: shopKeeper.name,
-      cpf: shopKeeper.cpf,
-      password: shopKeeper.password,
-      email: shopKeeper.email,
-      rg: shopKeeper.rg,
-      signature: {
-        startDate: shopKeeper.signature.startDate,
-        endDate: shopKeeper.signature.endDate,
-        plan: shopKeeper.signature.plan,
-      },
+      id: ShopKeeper.id,
+      name: ShopKeeper.name,
+      cpf: ShopKeeper.cpf,
+      password: ShopKeeper.password,
+      email: ShopKeeper.email,
+      rg: ShopKeeper.rg,
     }
   }
 
-  public static toOutputWithContract(shopKeeper: ShopKeeper) {
+  public static toOutputWithContract(ShopKeeper: ShopKeeper) {
+    if (ShopKeeper.contract) {
+      return {
+        id: ShopKeeper.id,
+        name: ShopKeeper.name,
+        cpf: ShopKeeper.cpf,
+        password: ShopKeeper.password,
+        email: ShopKeeper.email,
+        rg: ShopKeeper.rg,
+        contract: {
+          startDate: ShopKeeper.contract.startDate,
+          endDate: ShopKeeper.contract.endDate,
+          value: ShopKeeper.contract.value,
+        },
+      }
+    }
+
     return {
-      id: shopKeeper.id,
-      name: shopKeeper.name,
-      cpf: shopKeeper.cpf,
-      password: shopKeeper.password,
-      email: shopKeeper.email,
-      rg: shopKeeper.rg,
-      contract: {
-        startDate: shopKeeper.contract.startDate,
-        endDate: shopKeeper.contract.endDate,
-        value: shopKeeper.contract.value,
-      },
+      id: ShopKeeper.id,
+      name: ShopKeeper.name,
+      cpf: ShopKeeper.cpf,
+      password: ShopKeeper.password,
+      email: ShopKeeper.email,
+      rg: ShopKeeper.rg,
     }
   }
 }

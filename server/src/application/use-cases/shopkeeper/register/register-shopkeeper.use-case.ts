@@ -1,19 +1,20 @@
-import CommonUseCase from 'application/@shared/base.use-case'
-import ConflictError from 'domain/base/errors/conflict-error'
-import IShopKeeperRepository from 'domain/repositories/shopkeeper-repository.abstract'
+import CommonUseCase from '@application/@shared/base.use-case'
+import ConflictError from '@domain/base/errors/conflict-error'
+import IShopKeeperRepository from '@domain/repositories/shopkeeper-repository.abstract'
+
 export interface IRegisterShopKeeperInputDto {
   email: string
   cpf: string
 }
 export class RegisterShopKeeperUseCase extends CommonUseCase {
-  constructor(private readonly shopKeeperRepo: IShopKeeperRepository) {
+  constructor(private readonly ShopKeeperRepo: IShopKeeperRepository) {
     super()
   }
 
   async execute(dto: IRegisterShopKeeperInputDto) {
     const promises = [
-      this.shopKeeperRepo.emailAlreadyExists(dto.email),
-      this.shopKeeperRepo.cpfAlreadyExists(dto.cpf),
+      this.ShopKeeperRepo.emailAlreadyExists(dto.email),
+      this.ShopKeeperRepo.cpfAlreadyExists(dto.cpf),
     ]
 
     const [email, cpf] = await Promise.all(promises)

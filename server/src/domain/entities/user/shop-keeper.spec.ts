@@ -1,6 +1,6 @@
-import ShopKeeperFactory from './factories/shoop-keeper.facotry'
+import ShopKeeperFactory from './factories/shop-keeper.factory'
 import { SignaturePlanEnum } from './signature'
-import { describe, it, expect } from 'vitest'
+
 describe('ShopKeeper Unit Tests', () => {
   it('Should throw an error if ShopKeeper does not have Signature or Contract', () => {
     expect(() => {
@@ -27,17 +27,20 @@ describe('ShopKeeper Unit Tests', () => {
       },
     }
 
-    const shopKeeper = ShopKeeperFactory.withSignature(data)
+    const ShopKeeper = ShopKeeperFactory.withSignature(data)
 
-    expect(shopKeeper).toBeTruthy()
-    expect(shopKeeper.name).toEqual(data.name)
-    expect(shopKeeper.cpf).toEqual(data.cpf)
-    expect(shopKeeper.email).toEqual(data.email)
-    expect(shopKeeper.password).toEqual(data.password)
-    expect(shopKeeper.rg).toEqual(data.rg)
-    expect(shopKeeper.signature).toBeTruthy()
-    expect(shopKeeper.signature.plan).toEqual(data.signature.plan)
-    expect(shopKeeper.signature.startDate).toEqual(data.signature.startDate)
+    expect(ShopKeeper).toBeTruthy()
+    expect(ShopKeeper.name).toEqual(data.name)
+    expect(ShopKeeper.cpf).toEqual(data.cpf)
+    expect(ShopKeeper.email).toEqual(data.email)
+    expect(ShopKeeper.password).toEqual(data.password)
+    expect(ShopKeeper.rg).toEqual(data.rg)
+    expect(ShopKeeper.signature).toBeTruthy()
+
+    if (ShopKeeper.signature) {
+      expect(ShopKeeper.signature.plan).toEqual(data.signature.plan)
+      expect(ShopKeeper.signature.startDate).toEqual(data.signature.startDate)
+    }
   })
 
   it('Should create a ShopKeeper with a Contract', () => {
@@ -54,18 +57,21 @@ describe('ShopKeeper Unit Tests', () => {
       },
     }
 
-    const shopKeeper = ShopKeeperFactory.withContract(data)
+    const ShopKeeper = ShopKeeperFactory.withContract(data)
 
-    expect(shopKeeper).toBeTruthy()
-    expect(shopKeeper.name).toEqual(data.name)
-    expect(shopKeeper.cpf).toEqual(data.cpf)
-    expect(shopKeeper.email).toEqual(data.email)
-    expect(shopKeeper.password).toEqual(data.password)
-    expect(shopKeeper.rg).toEqual(data.rg)
-    expect(shopKeeper.contract).toBeTruthy()
-    expect(shopKeeper.contract.startDate).toEqual(data.contract.startDate)
-    expect(shopKeeper.contract.endDate).toEqual(data.contract.endDate)
-    expect(shopKeeper.contract.value).toEqual(data.contract.value)
+    expect(ShopKeeper).toBeTruthy()
+    expect(ShopKeeper.name).toEqual(data.name)
+    expect(ShopKeeper.cpf).toEqual(data.cpf)
+    expect(ShopKeeper.email).toEqual(data.email)
+    expect(ShopKeeper.password).toEqual(data.password)
+    expect(ShopKeeper.rg).toEqual(data.rg)
+    expect(ShopKeeper.contract).toBeTruthy()
+
+    if (ShopKeeper.contract) {
+      expect(ShopKeeper.contract.startDate).toEqual(data.contract.startDate)
+      expect(ShopKeeper.contract.endDate).toEqual(data.contract.endDate)
+      expect(ShopKeeper.contract.value).toEqual(data.contract.value)
+    }
   })
 
   it('Should throw an error if ShopKeeper has both Signature and Contract', () => {

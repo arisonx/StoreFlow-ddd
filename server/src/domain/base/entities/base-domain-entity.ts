@@ -1,4 +1,4 @@
-export default class BaseDomainEntity {
+export class BaseDomainEntity {
   private _id: string
   private _createdAt: Date = new Date()
   private _updatedAt!: Date

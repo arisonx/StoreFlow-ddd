@@ -1,8 +1,7 @@
 import RegisterShopKeeperWithContractUseCase from './register-shopkeeper-with-contract.use-case'
 import { RegisterShopKeeperUseCase } from './register-shopkeeper.use-case'
-import { describe, beforeEach, it, expect } from 'vitest'
 
-const shopKeeperVitestRepo = {
+const ShopKeeperVitestRepo = {
   findOne: vi.fn(),
   findAll: vi.fn(),
   create: vi.fn(),
@@ -25,11 +24,11 @@ describe('RegisterShopKeeperWithContractUseCase Unit Tests', () => {
 
   beforeEach(() => {
     registerShopKeeperUseCase = new RegisterShopKeeperUseCase(
-      shopKeeperVitestRepo,
+      ShopKeeperVitestRepo,
     )
     registerShopKeeperWithContractUseCase =
       new RegisterShopKeeperWithContractUseCase(
-        shopKeeperVitestRepo,
+        ShopKeeperVitestRepo,
         registerShopKeeperUseCase,
         mockBcryptAdapter,
       )
@@ -37,8 +36,8 @@ describe('RegisterShopKeeperWithContractUseCase Unit Tests', () => {
     vi.clearAllMocks()
   })
   it('Should register a ShopKeeper with Contract', async () => {
-    shopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(false)
-    shopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(false)
+    ShopKeeperVitestRepo.emailAlreadyExists.mockReturnValue(false)
+    ShopKeeperVitestRepo.cpfAlreadyExists.mockReturnValue(false)
     const hashedPassword =
       '$2a$12$cw3kBusXPtNmL8vrVty4deGFPfCHN.16O8VY4hHMl4QcHeDRcBAP2'
     mockBcryptAdapter.hash.mockResolvedValue(hashedPassword)

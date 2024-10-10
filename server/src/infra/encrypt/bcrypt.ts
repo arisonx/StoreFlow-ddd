@@ -1,4 +1,4 @@
-import EncryptContract from 'application/contracts/encrypt.interface'
+import EncryptContract from '@application/contracts/encrypt.interface'
 import * as bcrypt from 'bcrypt'
 
 export default class BcryptAdapter extends EncryptContract {

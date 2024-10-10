@@ -5,7 +5,6 @@ import { Password } from './password'
 import RG from './rg'
 import User from './user.entity'
 import Usermame from './username'
-import { describe, it, expect } from 'vitest'
 
 describe('User unit tests', () => {
   it('Should throw error if usermame is more than 255 caracteres', () => {
