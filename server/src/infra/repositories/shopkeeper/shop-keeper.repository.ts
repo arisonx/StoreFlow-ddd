@@ -8,6 +8,7 @@ import { SignaturePlanEnum } from '@domain/user/shopkeeper/signature/signature'
 import SignatureShopKeeper from '@domain/user/shopkeeper/signature/signature-shop-keeper.entity'
 import { randomUUID } from 'crypto'
 import { prisma } from '@infra/database/prisma/constants'
+import { Pagination } from '@application/utils/pagination'
 export default class ShopKeeperRepository implements IShopKeeperRepository {
   count(): Promise<number> {
     return prisma.user.count()
@@ -167,6 +168,12 @@ export default class ShopKeeperRepository implements IShopKeeperRepository {
   ): Promise<
     IResourceListOutputProps<ContractShopKeeper | SignatureShopKeeper>
   > {
+    const pagination = Pagination({
+      take: options.limit,
+      skip: options.offset,
+      all: options.all,
+    })
+
     const results = await prisma.user.findMany({
       where: {
         name: options.name,
@@ -175,6 +182,7 @@ export default class ShopKeeperRepository implements IShopKeeperRepository {
         contract: true,
         signature: true,
       },
+      ...pagination,
     })
 
     const mappedResult = results.map((result) => {

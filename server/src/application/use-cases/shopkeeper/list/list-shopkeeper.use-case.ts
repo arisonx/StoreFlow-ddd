@@ -3,6 +3,8 @@ import IShopKeeperRepository, {
 } from '@domain/user/shopkeeper/repositories/shopkeeper-repository.abstract'
 import { ShopKeeperMapper } from '../../../../domain/user/@shared/mapper/shop-keeper.mapper'
 import { IListShopKeeperInputDto } from './dto/input'
+import ContractShopKeeper from '@domain/user/shopkeeper/contract/contract-shop-keeper.entity'
+import SignatureShopKeeper from '@domain/user/shopkeeper/signature/signature-shop-keeper.entity'
 export class ListShopKeeperUseCase {
   constructor(private readonly ShopKeeperRepo: IShopKeeperRepository) {}
   async execute(dto?: IListShopKeeperInputDto) {
@@ -17,7 +19,11 @@ export class ListShopKeeperUseCase {
 
     return {
       ...result,
-      items: result.items.map(ShopKeeperMapper.toOutput),
+      items: result.items.map((item) =>
+        ShopKeeperMapper.toOutput(
+          item as ContractShopKeeper | SignatureShopKeeper,
+        ),
+      ),
     }
   }
 }

@@ -26,7 +26,7 @@
       "@domain/*": ["./src/domain/*"],
       "@application/*": ["./src/application/*"],
       "@test/*": ["./test/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["src/application/utils/*"]
     }
   },
   "exclude": ["./node_modules/*", "dist"]
