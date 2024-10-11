@@ -19,6 +19,11 @@ const mockBcryptAdapter = {
   compare: vi.fn(),
 }
 
+const mockJwtAdapter = {
+  sign: vi.fn(),
+  verify: vi.fn(),
+}
+
 describe('AuthShopKeeperUseCase Unit Tests', () => {
   let authShopKeeperUseCase: AuthShopKeeperUseCase
 
@@ -26,6 +31,7 @@ describe('AuthShopKeeperUseCase Unit Tests', () => {
     authShopKeeperUseCase = new AuthShopKeeperUseCase(
       ShopKeeperVitestRepo,
       mockBcryptAdapter,
+      mockJwtAdapter,
     )
     vi.clearAllMocks()
   })
@@ -44,7 +50,7 @@ describe('AuthShopKeeperUseCase Unit Tests', () => {
     }).rejects.toThrow('Invalid Email or Password')
   })
 
-  it('Should throw an error if CPF is not valid', async () => {
+  it('Should throw an error if Email or Password is not valid', async () => {
     ShopKeeperVitestRepo.findByEmail.mockResolvedValue({
       name: 'Merian Cardoso',
       cpf: '63067078080',
@@ -128,6 +134,9 @@ describe('AuthShopKeeperUseCase Unit Tests', () => {
         plan: SignaturePlanEnum.PREMIUM,
       },
     })
+    const token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+    mockJwtAdapter.sign.mockReturnValue(token)
     mockBcryptAdapter.compare.mockResolvedValue(true)
     const output = await authShopKeeperUseCase.execute({
       email: 'merian.cardoso@example.com',
@@ -137,6 +146,7 @@ describe('AuthShopKeeperUseCase Unit Tests', () => {
       'merian.cardoso@example.com',
     )
     expect(output).toBeTruthy()
-    expect(output.email).toBe('merian.cardoso@example.com')
+    expect(output.token).toBe(token)
+    expect(output.user.email).toBe('merian.cardoso@example.com')
   })
 })

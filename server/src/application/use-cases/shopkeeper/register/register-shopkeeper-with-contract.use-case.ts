@@ -23,6 +23,7 @@ export default class RegisterShopKeeperWithContractUseCase {
     const ShopKeeper = ShopKeeperFactory.withContract(dto)
 
     await this.ShopKeeperRepo.create(ShopKeeper)
+
     return ShopKeeperMapper.toOutputWithContract(ShopKeeper)
   }
 }

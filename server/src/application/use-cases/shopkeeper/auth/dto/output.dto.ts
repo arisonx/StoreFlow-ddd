@@ -1,4 +1,7 @@
 export interface IAuthShopKeeperOutputDto {
-  name: string
-  email: string
+  user: {
+    name: string
+    email: string
+  }
+  token: string
 }

@@ -8,12 +8,22 @@ export class SignatureShopKeeperService {
     const { plan, startDate } = shopKeeper.signature
 
     const signaturePeriodLiterals = {
-      [SignaturePlanEnum.STARTER]: monthInserter(startDate, 1),
-      [SignaturePlanEnum.BASIC]: monthInserter(startDate, 6),
-      [SignaturePlanEnum.PREMIUM]: monthInserter(startDate, 12),
+      [SignaturePlanEnum.STARTER]: () => ({
+        date: monthInserter(startDate, 1),
+        value: 50,
+      }),
+      [SignaturePlanEnum.BASIC]: () => ({
+        date: monthInserter(startDate, 6),
+        value: 80,
+      }),
+      [SignaturePlanEnum.PREMIUM]: () => ({
+        date: monthInserter(startDate, 12),
+        value: 100,
+      }),
     }
-    const endDate = signaturePeriodLiterals[plan]
+    const { date, value } = signaturePeriodLiterals[plan]()
 
-    shopKeeper.signature.insertEndDate(endDate)
+    shopKeeper.signature.insertEndDate(date)
+    shopKeeper.signature.insertValue(value)
   }
 }
