@@ -32,7 +32,7 @@ export default abstract class IShopKeeperRepository
 
   abstract findOne(
     id: string,
-  ): Promise<ContractShopKeeper | SignatureShopKeeper>
+  ): Promise<ContractShopKeeper | SignatureShopKeeper | undefined>
 
   abstract findAll(
     options: IShopKeeperListInputProps,

@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id
+  name String
+  rg String @unique
+  cpf String @unique
+  email String @unique
+  password String
+  signature Signature?
+  contract Contract?
+}
+
+model Signature {
+  endDate DateTime @map("end_date")
+  startDate DateTime @map("start_date")
+  plan String
+  value Float
+  userId String @unique @map("usuario_id")
+  user   User   @relation(fields: [userId], references: [id]) 
+}
+
+model Contract {
+  endDate DateTime @map("end_date")
+  startDate DateTime @map("start_date")
+  value Float
+  userId String @unique @map("usuario_id") 
+  user User @relation(fields: [userId],references: [id])
+}

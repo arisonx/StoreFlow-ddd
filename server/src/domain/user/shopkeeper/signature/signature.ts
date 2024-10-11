@@ -8,6 +8,7 @@ export default class Signature {
   private _endDate: Date
   private _startDate: Date
   private _plan: SignaturePlanEnum
+  private _value: number
 
   constructor(plan: SignaturePlanEnum, startDate: Date) {
     this._startDate = startDate
@@ -23,6 +24,10 @@ export default class Signature {
 
   insertEndDate(date: Date) {
     this._endDate = date
+  }
+
+  insertValue(value: number) {
+    this._value = value
   }
 
   get endDate() {
@@ -43,5 +48,9 @@ export default class Signature {
 
   get plan() {
     return this._plan
+  }
+
+  get value() {
+    return this._value
   }
 }

@@ -6,10 +6,14 @@ import { IAuthShopKeeperInputDto } from './dto/input.dto'
 import { IAuthShopKeeperOutputDto } from './dto/output.dto'
 import ContractShopKeeper from '@domain/user/shopkeeper/contract/contract-shop-keeper.entity'
 import SignatureShopKeeper from '@domain/user/shopkeeper/signature/signature-shop-keeper.entity'
+import JwtContract from '@application/contracts/jwt.interface'
+import { config } from 'dotenv'
+config()
 export class AuthShopKeeperUseCase extends CommonUseCase {
   constructor(
     private readonly ShopKeeperRepo: IShopKeeperRepository,
     private readonly encryptContract: EncryptContract,
+    private readonly jwtAdapter: JwtContract,
   ) {
     super()
   }
@@ -46,9 +50,19 @@ export class AuthShopKeeperUseCase extends CommonUseCase {
 
     this.notification.issue()
 
+    const token = this.jwtAdapter.sign(
+      {
+        id: shopKeeper.id,
+      },
+      process.env.JWT_SECRET_KEY as string,
+    )
+
     return {
-      name: shopKeeper.name,
-      email: shopKeeper.email,
+      user: {
+        name: shopKeeper.name,
+        email: shopKeeper.email,
+      },
+      token,
     }
   }
 }
