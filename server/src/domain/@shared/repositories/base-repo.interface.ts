@@ -9,7 +9,7 @@ export interface IResourceListOutputProps<T> {
 export interface IResourceListInputProps {
   limit?: number
   offset?: number
-  all?: number
+  all?: boolean
 }
 export default interface IRepository<T, O extends IResourceListInputProps> {
   findOne(id: string): Promise<T | undefined>
